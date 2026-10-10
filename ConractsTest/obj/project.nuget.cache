@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4lAx5qRhya8=",
+  "dgSpecHash": "a2fHXY+fBKw=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Lenovo\\source\\repos\\Lab1Contracts\\ConractsTest\\ConractsTest.csproj",
+  "projectFilePath": "D:\\Masha\\Курс2\\Теоретическая информатика\\Lab2\\SecondLabTheEngineWPF\\ConractsTest\\ConractsTest.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Lenovo\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.codecoverage\\17.8.0\\microsoft.codecoverage.17.8.0.nupkg.sha512",

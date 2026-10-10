@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using SortingAggregator.ViewModels;
 
-namespace SortingAggregator.Views;
+namespace GoodsLogistics.Views;
 
 public partial class ContractWindow : Window
 {

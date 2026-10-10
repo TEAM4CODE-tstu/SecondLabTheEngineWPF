@@ -1,5 +1,0 @@
-<Solution>
-  <Project Path="../ClassLibrary1/DomainClassLibrary.csproj" Id="1c7217b7-48bf-4121-aaf7-a91d2a945f14" />
-  <Project Path="../ConractsTest/ConractsTest.csproj" Id="e80918cf-d40e-4d54-95ac-b00787fa782a" />
-  <Project Path="Lab1.csproj" />
-</Solution>

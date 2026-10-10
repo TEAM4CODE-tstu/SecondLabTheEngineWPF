@@ -176,7 +176,7 @@ public abstract class OperationViewModelBase : ObservableObject
 
     protected virtual void ShowContract()
     {
-        var window = new Views.ContractWindow(this);
+        var window = new GoodsLogistics.Views.ContractWindow(this);
         window.ShowDialog();
     }
 }

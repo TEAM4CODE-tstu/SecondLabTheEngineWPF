@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="GoodsLogistics.Views.FragmentConstructor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" Background="LightBlue">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="16">
+            <!-- Пресеты -->
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                <Button Content="Пресет: Max из двух" Command="{Binding ApplyPresetCommand}" CommandParameter="Max"/>
+                <Button Content="Пресет: Квадратное уравнение" CommandParameter="Quad"/>
+                <Button Content="Пресет: Последовательность" CommandParameter="Seq"/>
+            </StackPanel>
+
+            <!-- Постусловие -->
+            <TextBlock Text="Цель (Post), кратко:"/>
+            <TextBox Text="{Binding PostText, UpdateSourceTrigger=PropertyChanged}" Padding="4" Margin="0,0,0,8"/>
+            <TextBlock Text="Цель (пояснение):"/>
+            <TextBox Text="{Binding PostHumanText, UpdateSourceTrigger=PropertyChanged}" Padding="4" Margin="0,0,0,12"/>
+
+            <!-- Код фрагмента -->
+            <TextBlock Text="Код фрагмента (присваивания, if-else; без циклов):"/>
+            <TextBox Text="{Binding CodeText, UpdateSourceTrigger=PropertyChanged}"
+             FontFamily="Consolas" AcceptsReturn="True" TextWrapping="Wrap"
+             MinHeight="120" VerticalScrollBarVisibility="Auto" Padding="4" Margin="0,4,0,12"/>
+
+            <!-- Кнопки -->
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                <Button Content="Рассчитать wp" Command="{Binding CalculateCommand}" Width="140" Height="36"/>
+                <Button Content="Показать триаду" Command="{Binding ShowTriadCommand}" Width="140" Height="36" Margin="16,0,0,0"/>
+            </StackPanel>
+
+            <!-- Ошибки -->
+            <TextBlock Text="{Binding ErrorText}" Foreground="Red" TextWrapping="Wrap" Margin="0,0,0,8"/>
+
+            <!-- Трейс шагов -->
+            <TextBlock Text="Шаги вычисления:" FontWeight="Bold" FontSize="16"/>
+            <ItemsControl ItemsSource="{Binding Steps}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock FontFamily="Consolas" Margin="0,2">
+            <Run Text="через  "/><Run Text="{Binding Operator}" FontWeight="Bold"/>
+            <Run Text="  →  "/><Run Text="{Binding Condition}"/>
+                        </TextBlock>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <!-- Итог -->
+            <TextBlock Text="Итоговое wp:" FontWeight="Bold" FontSize="16" Margin="0,12,0,4"/>
+            <TextBlock Text="{Binding FinalWp}" FontFamily="Consolas" FontSize="14"/>
+            <TextBlock Text="{Binding FinalWpHuman}" TextWrapping="Wrap" Margin="0,4,0,8"/>
+
+            <!-- Условия определённости -->
+            <ItemsControl ItemsSource="{Binding DefinednessNotes}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="#FFF7E6" CornerRadius="4" Padding="8,4" Margin="0,2">
+                            <TextBlock Text="{Binding}" Foreground="#B36B00" TextWrapping="Wrap"/>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <!-- Триада -->
+            <TextBlock Text="{Binding TriadText}" TextWrapping="Wrap" FontWeight="SemiBold"/>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

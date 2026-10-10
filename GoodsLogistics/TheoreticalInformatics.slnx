@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="../ConractsTest/ConractsTest.csproj" Id="e80918cf-d40e-4d54-95ac-b00787fa782a" />
+  <Project Path="../DomainClassLibrary/DomainClassLibrary.csproj" />
+  <Project Path="GoodsLogistics.csproj" />
+</Solution>

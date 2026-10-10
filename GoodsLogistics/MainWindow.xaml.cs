@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Windows;
 
-namespace SortingAggregator
+namespace GoodsLogistics
 {
     public partial class MainWindow : Window
     {
@@ -34,7 +34,7 @@ namespace SortingAggregator
 
         private void HelpButton_Click(object sender, RoutedEventArgs e)
         {
-            var helpWindow = new Lab1.HelpWindow();
+            var helpWindow = new GoodsLogistics.HelpWindow();
             helpWindow.Owner = this;
             helpWindow.ShowDialog(); 
         }

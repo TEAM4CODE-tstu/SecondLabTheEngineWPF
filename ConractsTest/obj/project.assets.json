@@ -5510,8 +5510,8 @@
     },
     "DomainClassLibrary/1.0.0": {
       "type": "project",
-      "path": "../ClassLibrary1/DomainClassLibrary.csproj",
-      "msbuildProject": "../ClassLibrary1/DomainClassLibrary.csproj"
+      "path": "../DomainClassLibrary/DomainClassLibrary.csproj",
+      "msbuildProject": "../DomainClassLibrary/DomainClassLibrary.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -5529,11 +5529,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Lenovo\\source\\repos\\Lab1Contracts\\ConractsTest\\ConractsTest.csproj",
+      "projectUniqueName": "D:\\Masha\\Курс2\\Теоретическая информатика\\Lab2\\SecondLabTheEngineWPF\\ConractsTest\\ConractsTest.csproj",
       "projectName": "ConractsTest",
-      "projectPath": "C:\\Users\\Lenovo\\source\\repos\\Lab1Contracts\\ConractsTest\\ConractsTest.csproj",
+      "projectPath": "D:\\Masha\\Курс2\\Теоретическая информатика\\Lab2\\SecondLabTheEngineWPF\\ConractsTest\\ConractsTest.csproj",
       "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Lenovo\\source\\repos\\Lab1Contracts\\ConractsTest\\obj\\",
+      "outputPath": "D:\\Masha\\Курс2\\Теоретическая информатика\\Lab2\\SecondLabTheEngineWPF\\ConractsTest\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5551,8 +5551,11 @@
           "framework": "net8.0-windows7.0",
           "targetAlias": "net8.0-windows",
           "projectReferences": {
-            "C:\\Users\\Lenovo\\source\\repos\\Lab1Contracts\\ClassLibrary1\\DomainClassLibrary.csproj": {
-              "projectPath": "C:\\Users\\Lenovo\\source\\repos\\Lab1Contracts\\ClassLibrary1\\DomainClassLibrary.csproj"
+            "D:\\Masha\\Курс2\\Теоретическая информатика\\Lab2\\SecondLabTheEngineWPF\\ClassLibrary1\\DomainClassLibrary.csproj": {
+              "projectPath": "D:\\Masha\\Курс2\\Теоретическая информатика\\Lab2\\SecondLabTheEngineWPF\\ClassLibrary1\\DomainClassLibrary.csproj"
+            },
+            "D:\\Masha\\Курс2\\Теоретическая информатика\\Lab2\\SecondLabTheEngineWPF\\DomainClassLibrary\\DomainClassLibrary.csproj": {
+              "projectPath": "D:\\Masha\\Курс2\\Теоретическая информатика\\Lab2\\SecondLabTheEngineWPF\\DomainClassLibrary\\DomainClassLibrary.csproj"
             }
           }
         }
