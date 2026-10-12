@@ -3,12 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:SortingAggregator.ViewModels"
         xmlns:View="clr-namespace:GoodsLogistics.Views"  
-        Title=" Администратор процесса погрузки "
+        Title=" Администратор процесса погрузки"
+        Closing="Window_Closing" 
         Height="500" Width="1080"
-        Closing="Window_Closing"
         ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen">
-    
+        WindowStartupLocation="CenterScreen"  Background="LightBlue">
+
 
     <Window.DataContext>
         <vm:MainViewModel/>
@@ -22,7 +22,7 @@
             <Setter Property="Fill" Value="LightGray"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding IsPreMet}" Value="True">
-                    <Setter Property="Fill" Value="Green"/> 
+                    <Setter Property="Fill" Value="Green"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding IsPreMet}" Value="False">
                     <Setter Property="Fill" Value="IndianRed"/>
@@ -30,68 +30,43 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <TabControl>
-        <TabItem Header="Контракты в интерфейсе">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="280"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TabControl  Grid.Row="0" Grid.ColumnSpan="2">
+            <TabItem Header="Контракты в интерфейсе">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="280"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- Добавленное-->
-                <Grid Grid.Column="0" Background="LightBlue">
-                    <!-- Закраска левого заднего плана в серый -->
-                    <Grid.RowDefinitions>
+                    <Grid Grid.Column="0"  Background="LightBlue">
+                        <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
-                        <!-- Строка для списка (займет все место сверху) -->
-                        <RowDefinition Height="Auto"/>
-                        <!-- Строка для кнопки справки-->
-                        <RowDefinition Height="Auto"/>
-                        <!-- Строка для кнопки выход -->
                     </Grid.RowDefinitions>
 
-                    <!-- Перенесенный список (Grid.Row="0") -->
-                    <ListBox Grid.Row="0"
-                  ItemsSource="{Binding Operations}"
-             DisplayMemberPath="DisplayName"
-             SelectedItem="{Binding SelectedOperation}"
-                         Background="Transparent"
-                         FontSize="16"
-             FontFamily="Trebuchet MS"
-             FontWeight="SemiBold" 
-             HorizontalContentAlignment="Center"
-             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                         BorderThickness="0"
-             Margin="8,8,8,4"/>
-
-                    <!-- Размещение кнопки справки -->
-                    <Button Grid.Row="1"
-                Content="Справка пользователя"
-                Height="32"
-                Margin="8,4,8,4"
-                Background="LightGray"
-                FontSize="16"
-             FontFamily="Trebuchet MS"
-                FontWeight="SemiBold"
-                Click="HelpButton_Click"/>
-
-                    <!-- Размещение кнопки выхода в самом низу колонки -->
-                    <Button Grid.Row="2"
-                Content="Выход"
-                Height="32"
-                Margin="8,4,8,8"
-                Background="#ff7575"
-                                             FontSize="16"
-             FontFamily="Trebuchet MS"
-                FontWeight="SemiBold"
-                Click="ExitButton_Click"/>
-
-
+                    <ListBox Grid.Row="0" 
+                        ItemsSource="{Binding Operations}"
+                        DisplayMemberPath="DisplayName"
+                        SelectedItem="{Binding SelectedOperation}"
+                        Background="Transparent"
+                        FontSize="16"
+                        FontFamily="Trebuchet MS"
+                        FontWeight="SemiBold" 
+                        HorizontalContentAlignment="Center"
+                        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                        BorderThickness="0"
+                        Margin="8,8,8,4"/>
                 </Grid>
-
-
                 <!-- Правая панель -->
-                <Grid Grid.Column="1" Background="LightBlue">
+                    <Grid Grid.Column="1"    Background="LightBlue">
 
                     <Border Margin="0" Padding="16" Background="Transparent"
                 BorderBrush="LightGray" BorderThickness="0" CornerRadius="0">
@@ -123,10 +98,10 @@
 
                                     <!-- Кнопка Выполнить -->
                                     <Button Content="Выполнить"
-                Command="{Binding ExecuteCommand}"
-                Width="140" Height="36" 
-                FontSize="14" FontWeight="Bold"
-                Background="LightGray"/>
+                                        Command="{Binding ExecuteCommand}"
+                                        Width="140" Height="36" 
+                                        FontSize="14" FontWeight="Bold"
+                                        Background="LightGray"/>
 
                                     <!-- КОМБОБОКС (Виден только при Оптимизации погрузки) -->
                                     <StackPanel Orientation="Horizontal" Margin="16,0,0,0">
@@ -228,4 +203,30 @@
             <View:FragmentConstructor/>
         </TabItem>
     </TabControl>
+    <StackPanel  Grid.Row="2">
+            <Button Grid.Row="1"  HorizontalAlignment="Left"
+           Content="Справка пользователя"
+           Height="32" Width ="200"
+           Margin="8,4,8,4"
+           Background="LightGray"
+           FontSize="16"
+           FontFamily="Trebuchet MS"
+           FontWeight="SemiBold"
+           Click="HelpButton_Click"/>
+
+        <!-- Размещение кнопки выхода в самом низу колонки -->
+        <Button Grid.Row="2"
+           Content="Выход"
+           HorizontalAlignment="Left"
+           Height="32" Width ="200"
+           Margin="8,4,8,8"
+           Background="#ff7575"
+           FontSize="16"
+           FontFamily="Trebuchet MS"
+           FontWeight="SemiBold"
+           Click="ExitButton_Click"/>
+    </StackPanel>
+    </Grid>
+
+
 </Window>

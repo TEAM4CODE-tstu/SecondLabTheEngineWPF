@@ -4,6 +4,87 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <Style x:Key="BaseTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Trebuchet MS"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+        <Style x:Key="BaseTextBoxStyle" TargetType="TextBox">
+            <Setter Property="FontFamily" Value="Trebuchet MS"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="LightGray"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+        <Style x:Key="ActionButtonStyle" TargetType="Button">
+            <Setter Property="FontFamily" Value="Trebuchet MS"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Height" Value="36"/>
+            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="12,4"/>
+            <Setter Property="MinWidth" Value="140"/>
+        </Style>
+        <Style x:Key="TransparentPresetButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontFamily" Value="Trebuchet MS"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Width" Value="190"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}"
+            CornerRadius="4">
+                            <TextBlock Text="{TemplateBinding Content}"
+                   TextAlignment="Center"
+                   TextWrapping="Wrap"
+                   VerticalAlignment="Center"
+                   Foreground="{TemplateBinding Foreground}"
+                   Padding="{TemplateBinding Padding}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#E1F5FE"/>
+                                <Setter Property="BorderBrush" Value="#007ACC"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#B3E5FC"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Background="LightBlue">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- ЛЕВАЯ ЧАСТЬ: Пресеты (как кликабельные ссылки) -->
+        <Border Grid.Column="0"  Padding="12, 20, 12, 12" BorderBrush="LightGray" BorderThickness="0,0,1,0">
+            <StackPanel>
+                <TextBlock Text="Пресеты" Style="{StaticResource BaseTextBlockStyle}" FontWeight="Bold" FontSize="16" Margin="0,0,0,16"/>
+
+                <Button Content="Max из двух" Command="{Binding ApplyPresetCommand}" CommandParameter="Max" Style="{StaticResource TransparentPresetButtonStyle}"/>
+                <Button Content="Квадратное уравнение" CommandParameter="Quad" Style="{StaticResource TransparentPresetButtonStyle}"/>
+                <Button Content="Последовательность" CommandParameter="Seq" Style="{StaticResource TransparentPresetButtonStyle}"/>
              d:DesignHeight="450" d:DesignWidth="800" Background="LightBlue">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Margin="16">
@@ -22,60 +103,78 @@
             Command="{Binding LoadPresetCommand}" 
             CommandParameter="Seq"/>
             </StackPanel>
+        </Border>
 
+        <!-- ПРАВАЯ ЧАСТЬ: Основные поля и результаты -->
+        <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto" Padding="24">
+            <StackPanel>
+                <!-- Постусловие -->
+                <TextBlock Text="Цель (Post)" Style="{StaticResource BaseTextBlockStyle}" FontWeight="Bold" FontSize="16" Margin="0,0,0,4"/>
+                <TextBlock Text="Кратко:" Style="{StaticResource BaseTextBlockStyle}" Margin="0,0,0,4"/>
+                <TextBox Text="{Binding PostText, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BaseTextBoxStyle}" Margin="0,0,0,12" IsReadOnly="True" />
 
-            <!-- Постусловие -->
-            <TextBlock Text="Цель (Post), кратко:"/>
-            <TextBox Text="{Binding PostText, UpdateSourceTrigger=PropertyChanged}" Padding="4" Margin="0,0,0,8"/>
-            <TextBlock Text="Цель (пояснение):"/>
-            <TextBox Text="{Binding PostHumanText, UpdateSourceTrigger=PropertyChanged}" Padding="4" Margin="0,0,0,12"/>
+                <TextBlock Text="Пояснение:" Style="{StaticResource BaseTextBlockStyle}" Margin="0,0,0,4"/>
+                <TextBox Text="{Binding PostHumanText, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BaseTextBoxStyle}" IsReadOnly="True" Margin="0,0,0,12"/>
 
-            <!-- Код фрагмента -->
-            <TextBlock Text="Код фрагмента (присваивания, if-else; без циклов):"/>
-            <TextBox Text="{Binding CodeText, UpdateSourceTrigger=PropertyChanged}"
-             FontFamily="Consolas" AcceptsReturn="True" TextWrapping="Wrap"
-             MinHeight="120" VerticalScrollBarVisibility="Auto" Padding="4" Margin="0,4,0,12"/>
+                <!-- Код фрагмента -->
+                <TextBlock Text="Код фрагмента" Style="{StaticResource BaseTextBlockStyle}" FontWeight="Bold" FontSize="16" Margin="0,0,0,4"/>
+                <TextBlock Text="Присваивания, if-else; без циклов" Style="{StaticResource BaseTextBlockStyle}" Foreground="#474b4e" Margin="0,0,0,8"/>
+                <TextBox Text="{Binding CodeText, UpdateSourceTrigger=PropertyChanged}"
+                         IsReadOnly="True"
+                         FontFamily="Consolas"
+                         AcceptsReturn="True" 
+                         TextWrapping="Wrap"
+                         MinHeight="140" 
+                         VerticalScrollBarVisibility="Auto" 
+                         Padding="8"
+                         Margin="0,0,0,16"
+                         Background="White"
+                         BorderBrush="LightGray"
+                         BorderThickness="1"/>
 
-            <!-- Кнопки -->
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
-                <Button Content="Рассчитать wp" Command="{Binding CalculateCommand}" Width="140" Height="36"/>
-                <Button Content="Показать триаду" Command="{Binding ShowTriadCommand}" Width="140" Height="36" Margin="16,0,0,0"/>
+                <!-- Кнопки действий -->
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                    <Button Content="Рассчитать wp" Command="{Binding CalculateCommand}" Style="{StaticResource ActionButtonStyle}"/>
+                    <Button Content="Показать триаду" Command="{Binding ShowTriadCommand}" Style="{StaticResource ActionButtonStyle}" Margin="12,0,0,0"/>
+                </StackPanel>
+
+                <!-- Ошибки -->
+                <TextBlock Text="{Binding ErrorText}" Foreground="IndianRed" Style="{StaticResource BaseTextBlockStyle}" TextWrapping="Wrap" Margin="0,0,0,16"/>
+
+                <!-- Результаты -->
+                <TextBlock Text="Результаты вычисления" Style="{StaticResource BaseTextBlockStyle}" FontWeight="Bold" FontSize="16" Margin="0,0,0,8"/>
+
+                <TextBlock Text="Шаги:" Style="{StaticResource BaseTextBlockStyle}" Margin="0,0,0,4"/>
+                <ItemsControl ItemsSource="{Binding Steps}" Margin="0,0,0,12">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Style="{StaticResource BaseTextBlockStyle}" Margin="0,2">
+                                <Run Text="через "/>
+                                <Run Text="{Binding Operator}" FontWeight="Bold"/>
+                                <Run Text=" → "/>
+                                <Run Text="{Binding Condition}"/>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <TextBlock Text="Итоговое wp:" Style="{StaticResource BaseTextBlockStyle}" FontWeight="Bold" Margin="0,0,0,4" FontSize ="14"/>
+                <TextBlock Text="{Binding FinalWp}" FontFamily="Consolas" FontSize="14" Style="{StaticResource BaseTextBlockStyle}" Margin="0,0,0,4"/>
+                <TextBlock Text="{Binding FinalWpHuman}" TextWrapping="Wrap" Style="{StaticResource BaseTextBlockStyle}" Margin="0,4,0,16"/>
+
+                <TextBlock Text="Условия определённости:" Style="{StaticResource BaseTextBlockStyle}" FontWeight="Bold" Margin="0,0,0,8"/>
+                <ItemsControl ItemsSource="{Binding DefinednessNotes}" Margin="0,0,0,12">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="#FFF7E6" CornerRadius="4" Padding="12" BorderBrush="LightGray" BorderThickness="1">
+                                <TextBlock Text="{Binding}" Foreground="#B36B00" TextWrapping="Wrap" Style="{StaticResource BaseTextBlockStyle}"/>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <TextBlock Text="Триада:" Style="{StaticResource BaseTextBlockStyle}" FontWeight="Bold" Margin="0,16,0,4"/>
+                <TextBlock Text="{Binding TriadText}" TextWrapping="Wrap" Style="{StaticResource BaseTextBlockStyle}" FontWeight="SemiBold" Margin="0,0,0,16"/>
             </StackPanel>
-
-            <!-- Ошибки -->
-            <TextBlock Text="{Binding ErrorText}" Foreground="Red" TextWrapping="Wrap" Margin="0,0,0,8"/>
-
-            <!-- Трейс шагов -->
-            <TextBlock Text="Шаги вычисления:" FontWeight="Bold" FontSize="16"/>
-            <ItemsControl ItemsSource="{Binding Steps}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock FontFamily="Consolas" Margin="0,2">
-            <Run Text="через  "/><Run Text="{Binding Operator}" FontWeight="Bold"/>
-            <Run Text="  →  "/><Run Text="{Binding Condition}"/>
-                        </TextBlock>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-
-            <!-- Итог -->
-            <TextBlock Text="Итоговое wp:" FontWeight="Bold" FontSize="16" Margin="0,12,0,4"/>
-            <TextBlock Text="{Binding FinalWp}" FontFamily="Consolas" FontSize="14"/>
-            <TextBlock Text="{Binding FinalWpHuman}" TextWrapping="Wrap" Margin="0,4,0,8"/>
-
-            <!-- Условия определённости -->
-            <ItemsControl ItemsSource="{Binding DefinednessNotes}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Border Background="#FFF7E6" CornerRadius="4" Padding="8,4" Margin="0,2">
-                            <TextBlock Text="{Binding}" Foreground="#B36B00" TextWrapping="Wrap"/>
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-
-            <!-- Триада -->
-            <TextBlock Text="{Binding TriadText}" TextWrapping="Wrap" FontWeight="SemiBold"/>
-        </StackPanel>
-    </ScrollViewer>
+        </ScrollViewer>
+    </Grid>
 </UserControl>

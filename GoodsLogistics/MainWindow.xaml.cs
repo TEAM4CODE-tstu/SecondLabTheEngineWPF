@@ -15,17 +15,17 @@ namespace GoodsLogistics
         /// <summary>
         ///  Метод и предупреждение для выхода из приложения чтобы не по крестику
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Window_Closing(object sender, CancelEventArgs e) 
+        /// <param name = "sender" ></ param >
+        //< param name="e"></param>
+        private void Window_Closing(object sender, CancelEventArgs e)
         {
             if (!_canClose)
             {
-                e.Cancel = true; 
+                e.Cancel = true;
                 MessageBox.Show("Используйте кнопку 'Выход' для корректного закрытия приложения!", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
-        
+
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             _canClose = true; 
