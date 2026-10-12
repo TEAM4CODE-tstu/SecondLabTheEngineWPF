@@ -1,21 +1,34 @@
 ﻿using System.Collections.ObjectModel;
-namespace SortingAggregator.ViewModels;
+using Lab1.Infrastructure;
 
-public class MainViewModel : Lab1.Infrastructure.ObservableObject
+namespace SortingAggregator.ViewModels
 {
-    // Коллекция доступных операций 
-    public ObservableCollection<OperationViewModelBase> Operations { get; } = new();
-
-    private OperationViewModelBase? _selectedOperation;
-    public OperationViewModelBase? SelectedOperation
+    public class MainViewModel : ObservableObject
     {
-        get => _selectedOperation;
-        set => SetProperty(ref _selectedOperation, value);
-    }
+        // Коллекция только для ЛР-1 (отображается в левом боковом меню)
+        public ObservableCollection<OperationViewModelBase> Operations { get; } = new();
 
-    public MainViewModel()
-    {
-        Operations = new ObservableCollection<OperationViewModelBase> {
-        new MinMaxViewModel(), new SortViewModel(), new SumViewModel()};
+        private OperationViewModelBase? _selectedOperation;
+        public OperationViewModelBase? SelectedOperation
+        {
+            get => _selectedOperation;
+            set => SetProperty(ref _selectedOperation, value);
+        }
+
+        // Выделенное свойство специально для ЛР-2 (для верхней вкладки)
+        public FragmentConstructorViewModel FragmentConstructor { get; } = new();
+
+        public MainViewModel()
+        {
+            // Здесь остаются ТОЛЬКО операции первой лабораторной
+            Operations.Add(new MinMaxViewModel());
+            Operations.Add(new SortViewModel());
+            Operations.Add(new SumViewModel());
+
+            if (Operations.Count > 0)
+            {
+                SelectedOperation = Operations[0];
+            }
+        }
     }
 }

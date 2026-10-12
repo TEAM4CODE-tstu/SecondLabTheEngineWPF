@@ -16,12 +16,12 @@
     <Page Include="App.xaml" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary1\DomainClassLibrary.csproj" />
-    <ProjectReference Include="..\DomainClassLibrary\DomainClassLibrary.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\DomainClassLibrary\DomainClassLibrary.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
+
+	<ItemGroup>
     <Compile Update="ViewModels\MainViewModel.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>

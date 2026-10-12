@@ -16,12 +16,12 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary1\DomainClassLibrary.csproj" />
-    <ProjectReference Include="..\DomainClassLibrary\DomainClassLibrary.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\DomainClassLibrary\DomainClassLibrary.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
+
+	<ItemGroup>
     <Using Include="Xunit" />
   </ItemGroup>
 

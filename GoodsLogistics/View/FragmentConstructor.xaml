@@ -7,12 +7,22 @@
              d:DesignHeight="450" d:DesignWidth="800" Background="LightBlue">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Margin="16">
+            
+            
+            
             <!-- Пресеты -->
             <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
-                <Button Content="Пресет: Max из двух" Command="{Binding ApplyPresetCommand}" CommandParameter="Max"/>
-                <Button Content="Пресет: Квадратное уравнение" CommandParameter="Quad"/>
-                <Button Content="Пресет: Последовательность" CommandParameter="Seq"/>
+                <Button Content="Пресет: Max из двух" 
+            Command="{Binding LoadPresetCommand}" 
+            CommandParameter="Max"/>
+                <Button Content="Пресет: Квадратное уравнение" 
+            Command="{Binding LoadPresetCommand}" 
+            CommandParameter="Quad"/>
+                <Button Content="Пресет: Последовательность" 
+            Command="{Binding LoadPresetCommand}" 
+            CommandParameter="Seq"/>
             </StackPanel>
+
 
             <!-- Постусловие -->
             <TextBlock Text="Цель (Post), кратко:"/>

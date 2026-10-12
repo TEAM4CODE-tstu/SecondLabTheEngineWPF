@@ -224,7 +224,7 @@
                 </Grid>
             </Grid>
         </TabItem>
-        <TabItem Header="Конструктор фрагмента">
+        <TabItem Header="Конструктор фрагмента" DataContext="{Binding FragmentConstructor}">
             <View:FragmentConstructor/>
         </TabItem>
     </TabControl>
