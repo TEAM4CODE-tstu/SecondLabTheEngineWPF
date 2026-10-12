@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Masha\\Курс2\\Теоретическая информатика\\Lab2\\SecondLabTheEngineWPF\\ConractsTest\\ConractsTest.csproj": {}
+    "C:\\Users\\Nickolay\\Desktop\\2 course\\TheorInf\\SecondLabTheEngineWPF\\ConractsTest\\ConractsTest.csproj": {}
   },
   "projects": {
-    "D:\\Masha\\Курс2\\Теоретическая информатика\\Lab2\\SecondLabTheEngineWPF\\ConractsTest\\ConractsTest.csproj": {
+    "C:\\Users\\Nickolay\\Desktop\\2 course\\TheorInf\\SecondLabTheEngineWPF\\ConractsTest\\ConractsTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Masha\\Курс2\\Теоретическая информатика\\Lab2\\SecondLabTheEngineWPF\\ConractsTest\\ConractsTest.csproj",
+        "projectUniqueName": "C:\\Users\\Nickolay\\Desktop\\2 course\\TheorInf\\SecondLabTheEngineWPF\\ConractsTest\\ConractsTest.csproj",
         "projectName": "ConractsTest",
-        "projectPath": "D:\\Masha\\Курс2\\Теоретическая информатика\\Lab2\\SecondLabTheEngineWPF\\ConractsTest\\ConractsTest.csproj",
-        "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-        "outputPath": "D:\\Masha\\Курс2\\Теоретическая информатика\\Lab2\\SecondLabTheEngineWPF\\ConractsTest\\obj\\",
+        "projectPath": "C:\\Users\\Nickolay\\Desktop\\2 course\\TheorInf\\SecondLabTheEngineWPF\\ConractsTest\\ConractsTest.csproj",
+        "packagesPath": "C:\\Users\\Nickolay\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Nickolay\\Desktop\\2 course\\TheorInf\\SecondLabTheEngineWPF\\ConractsTest\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Nickolay\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -29,8 +29,8 @@
             "framework": "net8.0-windows7.0",
             "targetAlias": "net8.0-windows",
             "projectReferences": {
-              "D:\\Masha\\Курс2\\Теоретическая информатика\\Lab2\\SecondLabTheEngineWPF\\DomainClassLibrary\\DomainClassLibrary.csproj": {
-                "projectPath": "D:\\Masha\\Курс2\\Теоретическая информатика\\Lab2\\SecondLabTheEngineWPF\\DomainClassLibrary\\DomainClassLibrary.csproj"
+              "C:\\Users\\Nickolay\\Desktop\\2 course\\TheorInf\\SecondLabTheEngineWPF\\DomainClassLibrary\\DomainClassLibrary.csproj": {
+                "projectPath": "C:\\Users\\Nickolay\\Desktop\\2 course\\TheorInf\\SecondLabTheEngineWPF\\DomainClassLibrary\\DomainClassLibrary.csproj"
               }
             }
           }
@@ -45,7 +45,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "10.0.300"
+        "SdkAnalysisLevel": "10.0.400"
       },
       "frameworks": {
         "net8.0-windows": {
@@ -85,21 +85,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.401/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Masha\\Курс2\\Теоретическая информатика\\Lab2\\SecondLabTheEngineWPF\\DomainClassLibrary\\DomainClassLibrary.csproj": {
+    "C:\\Users\\Nickolay\\Desktop\\2 course\\TheorInf\\SecondLabTheEngineWPF\\DomainClassLibrary\\DomainClassLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Masha\\Курс2\\Теоретическая информатика\\Lab2\\SecondLabTheEngineWPF\\DomainClassLibrary\\DomainClassLibrary.csproj",
+        "projectUniqueName": "C:\\Users\\Nickolay\\Desktop\\2 course\\TheorInf\\SecondLabTheEngineWPF\\DomainClassLibrary\\DomainClassLibrary.csproj",
         "projectName": "DomainClassLibrary",
-        "projectPath": "D:\\Masha\\Курс2\\Теоретическая информатика\\Lab2\\SecondLabTheEngineWPF\\DomainClassLibrary\\DomainClassLibrary.csproj",
-        "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-        "outputPath": "D:\\Masha\\Курс2\\Теоретическая информатика\\Lab2\\SecondLabTheEngineWPF\\DomainClassLibrary\\obj\\",
+        "projectPath": "C:\\Users\\Nickolay\\Desktop\\2 course\\TheorInf\\SecondLabTheEngineWPF\\DomainClassLibrary\\DomainClassLibrary.csproj",
+        "packagesPath": "C:\\Users\\Nickolay\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Nickolay\\Desktop\\2 course\\TheorInf\\SecondLabTheEngineWPF\\DomainClassLibrary\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Nickolay\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -126,7 +126,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "10.0.300"
+        "SdkAnalysisLevel": "10.0.400"
       },
       "frameworks": {
         "net8.0": {
@@ -148,7 +148,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.401/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

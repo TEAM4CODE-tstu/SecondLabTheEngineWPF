@@ -78,14 +78,14 @@
         </Grid.ColumnDefinitions>
 
         <!-- ЛЕВАЯ ЧАСТЬ: Пресеты (как кликабельные ссылки) -->
-        <Border Grid.Column="0" Padding="12,20,12,12" BorderBrush="LightGray" BorderThickness="0,0,1,0">
+        <Border Grid.Column="0" Padding="12, 20, 12, 12" BorderBrush="LightGray" BorderThickness="0,0,1,0">
             <StackPanel>
                 <TextBlock Text="Пресеты" Style="{StaticResource BaseTextBlockStyle}" FontWeight="Bold" FontSize="16" Margin="0,0,0,16"/>
-                <Button Content="Max из двух" Command="{Binding ApplyPresetCommand}" CommandParameter="Max" Style="{StaticResource TransparentPresetButtonStyle}"/>
-                <Button Content="Квадратное уравнение" CommandParameter="Quad" Style="{StaticResource TransparentPresetButtonStyle}"/>
-                <Button Content="Последовательность" CommandParameter="Seq" Style="{StaticResource TransparentPresetButtonStyle}"/>
 
-               
+                <!-- ИСПРАВЛЕНО: Везде указана корректная команда LoadPresetCommand -->
+                <Button Content="Max из двух" Command="{Binding LoadPresetCommand}" CommandParameter="Max" Style="{StaticResource TransparentPresetButtonStyle}"/>
+                <Button Content="Квадратное уравнение" Command="{Binding LoadPresetCommand}" CommandParameter="Quad" Style="{StaticResource TransparentPresetButtonStyle}"/>
+                <Button Content="Последовательность" Command="{Binding LoadPresetCommand}" CommandParameter="Seq" Style="{StaticResource TransparentPresetButtonStyle}"/>
             </StackPanel>
         </Border>
 

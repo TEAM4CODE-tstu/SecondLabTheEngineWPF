@@ -17,17 +17,17 @@ namespace DomainClassLibrary
             {
                 "max" => new PresetData
                 {
-                    Code = "if (x1 >= x2) then max := x1; else max := x2;",
+                    Code = "if (x1 >= x2) then max := x1 else max := x2",
                     PostFormula = "max > 100",
                     PostHuman = "Максимальный вес груза в партии превышает 100 кг"
                 },
-                "quad" or "equation" => new PresetData // Добавлено "quad"
+                "quad" or "equation" => new PresetData
                 {
                     Code = "D := b * b - 4 * a * c;\nif (D >= 0) then x1 := (-b + 10) / (2 * a);",
                     PostFormula = "x1 > 0",
                     PostHuman = "Первый критический коэффициент распределения строго положителен"
                 },
-                "seq" or "sequence" => new PresetData // Добавлено "seq"
+                "seq" or "sequence" => new PresetData
                 {
                     Code = "x := x + 10;\ny := x * 2;",
                     PostFormula = "y > 50",
