@@ -7,19 +7,16 @@ using Lab1.Infrastructure;
 
 namespace SortingAggregator.ViewModels
 {
-    // Класс для пошагового трейса, который требует XAML твоего коллеги (через Run Text)
-    public class WpStepItem
+    public class WpStepItem 
     {
-        public string Operator { get; set; }
+        public string Operator { get; set; } // для вывода шагов
         public string Condition { get; set; }
     }
 
     public class FragmentConstructorViewModel : OperationViewModelBase
     {
         private readonly WpEngine _wpEngine;
-
-        // Поля, названные строго по XAML твоего коллеги
-        private string _postText;
+        private string _postText; // хранилища текущего текста
         private string _postHumanText;
         private string _codeText;
         private string _finalWp;
@@ -27,9 +24,9 @@ namespace SortingAggregator.ViewModels
         private string _errorText;
         private string _triadText;
 
-        public override string DisplayName => "Конструктор фрагмента";
+        public override string DisplayName => "Конструктор фрагмента"; // имя вкладки
 
-        // Свойства привязки XAML (TextBox и TextBlock)
+        // свойства привязки XAML (TextBox и TextBlock)
         public string PostText
         {
             get => _postText;
@@ -72,16 +69,16 @@ namespace SortingAggregator.ViewModels
             set => SetProperty(ref _triadText, value);
         }
 
-        // Коллекции для списков XAML (Steps и DefinednessNotes)
+        // коллекции для списков XAML (Steps и DefinednessNotes)
         public ObservableCollection<WpStepItem> Steps { get; set; }
         public ObservableCollection<string> DefinednessNotes { get; set; }
 
-        // Команды, названные строго по XAML кнопок
+        // команды
         public ICommand LoadPresetCommand { get; }
         public ICommand CalculateCommand { get; }
         public ICommand ShowTriadCommand { get; }
 
-        // Заглушки для базового класса ЛР-1
+        // заглушки для базового класса ЛР-1
         public override string ContractPre => "Авто-wp";
         public override string ContractPost => "Цель из XAML";
         public override string ContractEffects => "Анализ Дейкстры";
@@ -93,9 +90,8 @@ namespace SortingAggregator.ViewModels
             _wpEngine = new WpEngine();
             Steps = new ObservableCollection<WpStepItem>();
             DefinednessNotes = new ObservableCollection<string>();
-
-            // Связываем кнопки XAML с логикой
-            LoadPresetCommand = new RelayCommand(param => ExecuteLoadPreset(param?.ToString()));
+                        
+            LoadPresetCommand = new RelayCommand(param => ExecuteLoadPreset(param?.ToString())); // связка кнопок с логикой
             CalculateCommand = new RelayCommand(_ => ExecuteCalculateWp());
             ShowTriadCommand = new RelayCommand(_ => ExecuteShowHoareTriple());
         }
@@ -108,8 +104,7 @@ namespace SortingAggregator.ViewModels
             CodeText = preset.Code;
             PostText = preset.PostFormula;
             PostHumanText = preset.PostHuman;
-
-            // Очищаем предыдущие результаты
+                        
             Steps.Clear();
             DefinednessNotes.Clear();
             FinalWp = string.Empty;
@@ -134,33 +129,28 @@ namespace SortingAggregator.ViewModels
             try
             {
                 var result = _wpEngine.CalculateWp(CodeText, PostText);
+                                
+                Steps.Add(new WpStepItem { Operator = "START", Condition = PostText }); // обычные строки в красивые объекты для Run Text в XAML
 
-                // Превращаем обычные строки в красивые объекты для Run Text в XAML
-                Steps.Add(new WpStepItem { Operator = "START", Condition = PostText });
-
-                foreach (var step in result.Steps.Skip(1)) // Пропускаем стартовое, так как добавили его красиво
-                {
-                    // Вырезаем название оператора для красивого разделения в интерфейсе
-                    string opName = step.Contains("[") ? step.Split('[', ']')[1] : "Команда";
+                foreach (var step in result.Steps.Skip(1)) // пропускаем стартовое, так как добавили его красиво
+                {                    
+                    string opName = step.Contains("[") ? step.Split('[', ']')[1] : "Команда"; // вырезаем название оператора для красивого разделения в интерфейсе
                     string cond = step.Contains("]:") ? step.Split(new[] { "]:" }, StringSplitOptions.None)[1].Trim() : step;
 
                     Steps.Add(new WpStepItem { Operator = opName, Condition = cond });
                 }
-
                 FinalWp = result.FinalFormula;
 
-                // Если в коде есть деление, выводим красивую плашку предупреждения
-                if (CodeText.Contains("/"))
+                if (CodeText.Contains("/")) 
                 {
-                    DefinednessNotes.Add("Внимание: Обнаружена операция деления. Движок автоматически добавил в контракт проверку определенности (знаменатель ≠ 0) для предотвращения падения программы.");
+                    DefinednessNotes.Add("Обнаружена операция деления. Добавлена проверка определенности (знаменатель != 0)");
                 }
             }
             catch (Exception ex)
             {
-                ErrorText = $"Ошибка анализа движком: {ex.Message}";
+                ErrorText = $"Ошибка анализа: {ex.Message}";
             }
         }
-
         private void ExecuteShowHoareTriple()
         {
             if (string.IsNullOrWhiteSpace(FinalWp))
@@ -168,9 +158,7 @@ namespace SortingAggregator.ViewModels
                 MessageBox.Show("Сначала выполните расчет (Рассчитать wp)!", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-
-            // Выводим текст триады прямо на экран (в самый низ формы, куда фронтендщик привязал TriadText)
-            TriadText = $"Академическая Триада Хоара для отчета:\n" +
+            TriadText = $"Триада Хоара:\n" +
                         $"{{{FinalWp}}}\n" +
                         $"{CodeText}\n" +
                         $"{{{PostText} ({PostHumanText})}}";

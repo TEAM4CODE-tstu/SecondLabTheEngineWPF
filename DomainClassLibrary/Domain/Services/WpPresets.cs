@@ -4,16 +4,16 @@ namespace DomainClassLibrary
 {
     public class PresetData
     {
-        public string Code { get; set; }
-        public string PostFormula { get; set; }
-        public string PostHuman { get; set; }
+        public string Code { get; set; } // программный код
+        public string PostFormula { get; set; } // математическая цель (краткое постусловие)
+        public string PostHuman { get; set; } // перевод этой цели на человеческий язык 
     }
 
     public static class WpPresets
     {
-        public static PresetData GetPreset(string presetType)
+        public static PresetData GetPreset(string presetType) // метод выдачи пресетов
         {
-            return presetType.ToLower() switch
+            return presetType.ToLower() switch 
             {
                 "max" => new PresetData
                 {
