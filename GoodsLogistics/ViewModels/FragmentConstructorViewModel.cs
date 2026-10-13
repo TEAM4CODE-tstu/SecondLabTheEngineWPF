@@ -158,8 +158,7 @@ namespace SortingAggregator.ViewModels
                 MessageBox.Show("Сначала выполните расчет (Рассчитать wp)!", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            TriadText = $"Триада Хоара:\n" +
-                        $"{{{FinalWp}}}\n" +
+            TriadText = $"{{{FinalWp}}}\n" +
                         $"{CodeText}\n" +
                         $"{{{PostText} ({PostHumanText})}}";
         }
