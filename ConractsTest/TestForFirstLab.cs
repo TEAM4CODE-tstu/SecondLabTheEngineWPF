@@ -1,10 +1,15 @@
+using DomainClassLibrary;
+using Lab1.Domain.Services;
 using Lab1.Domain.Services.SortingServices;
+using Lab1.Infrastructure;
 using System.Security.Cryptography;
 using static Lab1.Domain.Services.MinMaxService;
 using static Lab1.Domain.Services.SumService;
 namespace Contracts.Tests
 {
-    public class Test
+    // тесты Сони Залкиной для первой лабораторной работы
+
+    public class FirstLabTest
     {
         private ISortAlgorithm countingSortAlgorithm = SortAlgorithmFactory.GetAlgorithm("Подсчётом");
         private ISortAlgorithm mergeSortAlgorithm = SortAlgorithmFactory.GetAlgorithm("Слиянием");
@@ -30,7 +35,7 @@ namespace Contracts.Tests
         }
 
         [Fact]
-        public void Sort_TypicalArray_PreservesMultiset()  
+        public void Sort_TypicalArray_PreservesMultiset()
         {
             int[] input = { 5, 3, 8, 1 };
 
@@ -120,7 +125,8 @@ namespace Contracts.Tests
 
         [Fact]
         public void Sort_NullInput_ThrowsException()
-        {;
+        {
+            ;
             Assert.ThrowsAny<Exception>(() => countingSortAlgorithm.Sort(null!));
             Assert.ThrowsAny<Exception>(() => mergeSortAlgorithm.Sort(null!));
             Assert.ThrowsAny<Exception>(() => quickSortingAlgorithm.Sort(null!));
