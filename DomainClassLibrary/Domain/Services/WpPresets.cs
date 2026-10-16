@@ -23,15 +23,15 @@ namespace DomainClassLibrary
                 },
                 "quad" or "equation" => new PresetData
                 {
-                    Code = "D := b * b - 4 * a * c;\nif (D >= 0) then x1 := (-b + 10) / (2 * a);",
+                    Code = "D := b * b - 4 * a * c;\nif (D >= 0) then x1 := (-b + sqrt(D)) / (2 * a);",
                     PostFormula = "x1 > 0",
-                    PostHuman = "Первый критический коэффициент распределения строго положителен"
+                    PostHuman = "Найденный корень уравнения существует и является положительным числом"
                 },
                 "seq" or "sequence" => new PresetData
                 {
                     Code = "x := x + 10;\ny := x * 2;",
                     PostFormula = "y > 50",
-                    PostHuman = "Итоговый суммарный индекс погрузки y больше 50"
+                    PostHuman = "Вес груза с учётом упаковки (+10 кг) и страхового запаса (х2) превышает 50 кг"
                 },
                 _ => throw new ArgumentException("Неизвестный тип пресета")
             };

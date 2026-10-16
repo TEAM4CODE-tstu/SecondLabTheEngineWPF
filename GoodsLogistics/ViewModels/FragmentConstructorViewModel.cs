@@ -130,7 +130,7 @@ namespace SortingAggregator.ViewModels
             {
                 var result = _wpEngine.CalculateWp(CodeText, PostText);
                                 
-                Steps.Add(new WpStepItem { Operator = "START", Condition = PostText }); // обычные строки в красивые объекты для Run Text в XAML
+                Steps.Add(new WpStepItem { Operator = "начало", Condition = PostText }); // обычные строки в красивые объекты для Run Text в XAML
 
                 foreach (var step in result.Steps.Skip(1)) // пропускаем стартовое, так как добавили его красиво
                 {                    
@@ -158,9 +158,9 @@ namespace SortingAggregator.ViewModels
                 MessageBox.Show("Сначала выполните расчет (Рассчитать wp)!", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            TriadText = $"{{{FinalWp}}}\n" +
-                        $"{CodeText}\n" +
-                        $"{{{PostText} ({PostHumanText})}}";
+           TriadText = $"{{{FinalWp}}}\n\n" +
+            $"{CodeText}\n\n" +
+            $"{{{PostText}\n   // {PostHumanText}}}";
         }
 
         protected override bool CheckPre(out string failReason) { failReason = ""; return true; }
