@@ -1,6 +1,4 @@
-﻿// тесты Тактарова Артемия для второй лабораторной работы
-
-using DomainClassLibrary;
+﻿using DomainClassLibrary;
 using Lab1.Domain.Services;
 using Lab1.Infrastructure;
 
@@ -8,6 +6,12 @@ public class SecondLabTest
 {
     private readonly WpEngine _engine = new();
 
+    // Блок 1. Проверки WpPrseets
+
+    /// <summary>
+    /// Проверяет, что метод WpPresets.GetPreset корректно возвращает заранее заготовленный шаблон
+    /// для задачи поиска максимального значения, когда ему передают ключ "max".
+    /// </summary>
     [Theory]
     [InlineData("max")]
     public void GetPreset_Max_ReturnsExpectedData(string presetType)
@@ -20,6 +24,10 @@ public class SecondLabTest
         Assert.Equal("Максимальный вес груза в партии превышает 100 кг", result.PostHuman);
     }
 
+    /// <summary>
+    /// Проверяет, что система корректно возвращает шаблон (пресет) для решения квадратного уравнения, 
+    /// и делает это одинаково хорошо для двух разных названий-синонимов: "quad" и "equation".
+    /// </summary>
     [Theory]
     [InlineData("quad")]
     [InlineData("equation")]
@@ -33,6 +41,10 @@ public class SecondLabTest
         Assert.Equal("x1 > 0", result.PostFormula);
     }
 
+    /// <summary>
+    /// Проверяет, что система корректно выдает шаблон для последовательности действий, 
+    /// и поддерживает два разных названия для этого шаблона: короткое "seq" и полное
+    /// </summary>
     [Theory]
     [InlineData("seq")]
     [InlineData("sequence")]
@@ -46,12 +58,23 @@ public class SecondLabTest
         Assert.Equal("y > 50", result.PostFormula);
     }
 
+    /// <summary>
+    /// проверяет, как система реагирует на заведомо ошибочный запрос 
+    /// (запрос несуществующего пресета "unknown").
+    /// </summary>
     [Fact]
     public void GetPreset_UnknownType_ThrowsArgumentException()
     {
         Assert.Throws<ArgumentException>(() => WpPresets.GetPreset("unknown"));
     }
 
+    // Блок 2. Тестирование класса WpEngine
+
+    /// <summary>
+    /// Проверяет простейшую замену. 
+    /// Если после кода x := x + 10 должно быть x > 20, 
+    /// то до выполнения кода должно быть (x + 10) > 20.
+    /// </summary>
     [Fact]
     public void CalculateWp_SingleAssignment_PerformsSubstitution()
     {
@@ -68,6 +91,10 @@ public class SecondLabTest
         Assert.Contains("> 20", finalFormula);
     }
 
+    /// <summary>
+    /// Проверяет, что множественные присваивания 
+    /// обрабатываются в ОБРАТНОМ порядке (снизу вверх)
+    /// </summary>
     [Fact]
     public void CalculateWp_MultipleAssignments_ProcessesInReverseOrder()
     {
@@ -88,6 +115,11 @@ public class SecondLabTest
         Assert.Contains("> 50", result.FinalFormula);
     }
 
+    /// <summary>
+    /// Проверяет генерацию условий безопасности.
+    /// При наличии операции деления движок должен автоматически добавить 
+    /// требование, что знаменатель не равен нулю.
+    /// </summary>
     [Fact]
     public void CalculateWp_Division_AddsSafetyCondition()
     {
@@ -113,6 +145,10 @@ public class SecondLabTest
         Assert.Contains("> 0", formula);
     }
 
+    /// <summary>
+    /// Проверяет корректный парсинг сложного знаменателя (выражения в скобках).
+    /// Условие безопасности должно применяться ко всему выражению в знаменателе целиком.
+    /// </summary>
     [Fact]
     public void CalculateWp_ComplexDenominator_ExtractsLastPartAfterSlash()
     {
@@ -136,6 +172,10 @@ public class SecondLabTest
         Assert.Contains("< 10", formula);
     }
 
+    /// <summary>
+    ///  Проверяет, что для if-else в итоговой формуле появляются обе части:
+    ///  условие (x1 >= x2) и его отрицание !(x1 >= x2).
+    /// </summary>
     [Fact]
     public void CalculateWp_IfElse_GeneratesDijkstraFormula()
     {
@@ -152,6 +192,10 @@ public class SecondLabTest
         Assert.Contains("!(x1 >= x2)", formula);
     }
 
+    /// <summary>
+    /// Проверяет, что подстановка значений (10 и 20)
+    /// происходит внутри обеих веток условия.
+    /// </summary>
     [Fact]
     public void CalculateWp_IfWithAssignmentInThen_SubstitutesThenBranch()
     {
@@ -168,6 +212,9 @@ public class SecondLabTest
         Assert.Contains("20", final);
     }
 
+    /// <summary>
+    /// Проверяет ситуацию, когда есть только if, но нет else.
+    /// </summary>
     [Fact]
     public void CalculateWp_IfWithoutElse_TreatsElseAsSkip()
     {
@@ -183,6 +230,9 @@ public class SecondLabTest
         Assert.Contains("x > 0", final);
     }
 
+    /// <summary>
+    /// Передает пустую строку "" в качестве кода.
+    /// </summary>
     [Fact]
     public void CalculateWp_EmptyCode_ReturnsOriginalPostconditionAsFinal()
     {
@@ -196,6 +246,10 @@ public class SecondLabTest
         Assert.Equal(post, result.FinalFormula);
     }
 
+    /// <summary>
+    /// Проверяет, что код, состоящий исключительно из пробельных символов, 
+    /// обрабатывается так же, как и полностью пустой код.
+    /// </summary>
     [Fact]
     public void CalculateWp_CodeWithOnlyWhitespace_BehavesLikeEmpty()
     {
@@ -208,18 +262,30 @@ public class SecondLabTest
         Assert.Equal(post, result.FinalFormula);
     }
 
+    /// <summary>
+    /// Передача null вместо кода программы 
+    /// должна приводить к предсказуемому исключению.
+    /// </summary>
     [Fact]
     public void CalculateWp_NullCode_ThrowsException()
     {
         Assert.Throws<NullReferenceException>(() => _engine.CalculateWp(null!, "x > 0"));
     }
 
+    /// <summary>
+    /// Передача null вместо постусловия 
+    /// должна приводить к предсказуемому исключению.
+    /// </summary>
     [Fact]
     public void CalculateWp_NullPostCondition_ThrowsException()
     {
         Assert.Throws<ArgumentNullException>(() => _engine.CalculateWp("x := 1;", null!));
     }
 
+    /// <summary>
+    /// Проверяет корректность замены имен переменных с использованием границ слов.
+    /// Замена переменной "max" не должна случайно изменять подстроку внутри другого слова (например, "maximum").
+    /// </summary>
     [Fact]
     public void CalculateWp_VariableNameAsSubstring_UsesWordBoundary()
     {
@@ -236,7 +302,13 @@ public class SecondLabTest
         Assert.Contains("(x1)", final);
     }
 
-    // Вспомогательный метод для проверки мультимножества (одинаковые элементы с одинаковой частотой)
+    // Блок 3: Тестирование класса SortingService
+
+    /// <summary>
+    /// Вспомогательный метод для проверки мультимножества.
+    /// Гарантирует, что два массива содержат одинаковые элементы 
+    /// с одинаковой частотой, игнорируя их исходный порядок.
+    /// </summary>
     private static void AssertMultisetEqual(int[] expected, int[] actual)
     {
         Assert.Equal(expected.Length, actual.Length);
@@ -245,8 +317,13 @@ public class SecondLabTest
         Assert.Equal(expectedSorted, actualSorted);
     }
 
+    /// <summary>
+    /// Параметризованный тест корректности сортировки.
+    /// Проверяет разные алгоритмы ("Подсчётом", "Быстрая", "Слиянием") 
+    /// на разных входных данных. Убеждается, что массив отсортирован 
+    /// по неубыванию и ни один элемент не был потерян или добавлен.
+    /// </summary>
     [Theory]
-    // Используем русские имена, как в SortAlgorithmFactory
     [InlineData(new[] { 3, 1, 2 }, "Подсчётом")]
     [InlineData(new[] { 5, 5, 2, 2, 9 }, "Быстрая")]
     [InlineData(new[] { -1, -5, 0, 3 }, "Слиянием")]
@@ -257,16 +334,18 @@ public class SecondLabTest
 
         Assert.True(milliseconds >= 0, "Время должно быть неотрицательным");
 
-        // Проверка упорядоченности
         for (int i = 1; i < result.Length; i++)
         {
             Assert.True(result[i - 1] <= result[i], "Массив не отсортирован по неубыванию");
         }
 
-        // Проверка сохранения элементов (мультимножество)
         AssertMultisetEqual(input, result);
     }
 
+    /// <summary>
+    /// Проверяет защитный механизм: передача null 
+    /// должна прерывать выполнение и выбрасывать ArgumentException.
+    /// </summary>
     [Fact]
     public void Sort_NullArray_ThrowsArgumentExceptionViaGuard()
     {
@@ -279,6 +358,10 @@ public class SecondLabTest
         Assert.Contains("не должен быть null или пустым", ex.Message, System.StringComparison.OrdinalIgnoreCase);
     }
 
+    /// <summary>
+    /// Проверяет защитный механизм для пустого массива. 
+    /// В данной реализации сортировка пустого массива считается недопустимой операцией.
+    /// </summary>
     [Fact]
     public void Sort_EmptyArray_ThrowsArgumentExceptionViaGuard()
     {
@@ -291,13 +374,16 @@ public class SecondLabTest
         Assert.Contains("не должен быть null или пустым", ex.Message, System.StringComparison.OrdinalIgnoreCase);
     }
 
+    /// <summary>
+    /// Проверяет, что программа корректно реагирует на запрос 
+    /// несуществующего алгоритма сортировки, выбрасывая ArgumentException.
+    /// </summary>
     [Fact]
     public void Sort_UnknownAlgorithm_ThrowsArgumentException()
     {
         int[] input = new[] { 3, 1, 2 };
         string algorithmName = "NonExistentSort";
 
-        // Важно: ловим именно ArgumentException, потому что фабрика его выбрасывает
         var ex = Assert.Throws<ArgumentException>(() =>
             SortingService.Sort(input, algorithmName));
 
@@ -305,6 +391,10 @@ public class SecondLabTest
         Assert.Contains("Неизвестный алгоритм", ex.Message, System.StringComparison.OrdinalIgnoreCase);
     }
 
+    /// <summary>
+    /// Граничный случай: массив из одного элемента. 
+    /// Результат должен быть идентичен исходному массиву.
+    /// </summary>
     [Fact]
     public void Sort_SingleElement_ReturnsSameElement()
     {
@@ -318,6 +408,11 @@ public class SecondLabTest
         AssertMultisetEqual(input, result);
     }
 
+    /// <summary>
+    /// Проверяет поведение алгоритма на уже отсортированном массиве.
+    /// Алгоритм должен корректно завершить работу, не нарушив порядок 
+    /// и не потеряв элементы.
+    /// </summary>
     [Fact]
     public void Sort_AlreadySorted_ReturnsSameArrayWithoutChangesToMultiset()
     {
@@ -332,6 +427,11 @@ public class SecondLabTest
         AssertMultisetEqual(input, result);
     }
 
+    /// <summary>
+    /// Проверяет базовую функциональность утилиты замера времени.
+    /// Убеждается, что переданное действие выполняется ровно один раз, 
+    /// возвращает правильный результат, а замеренное время неотрицательно.
+    /// </summary>
     [Fact]
     public void Measure_ActionExecutesAndReturnsResult()
     {
@@ -349,16 +449,20 @@ public class SecondLabTest
         Assert.True(milliseconds >= 0);
     }
 
+    /// <summary>
+    /// Проверяет, что утилита замера времени корректно фиксирует реальные задержки.
+    /// Искусственная пауза (Thread.Sleep) должна отразиться в измеренном времени 
+    /// (с небольшим допуском на погрешность планировщика операционной системы).
+    /// </summary>
     [Fact]
     public void Measure_MeasuresNonZeroTimeForSlowAction()
     {
         var delayMs = 100;
 
-        // Явно указываем тип <int>, а лямбда теперь возвращает число
         var (milliseconds, _) = TimeMeasurement.Measure<int>(() =>
         {
             Thread.Sleep(delayMs);
-            return 0; // Возвращаем фиктивное значение, чтобы удовлетворить Func<T>
+            return 0;
         });
 
         Assert.True(milliseconds > 0, "Замер должен показать ненулевое время");
