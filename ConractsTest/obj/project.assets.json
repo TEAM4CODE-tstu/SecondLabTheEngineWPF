@@ -5530,11 +5530,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Пользователь\\source\\repos\\SecondLabTheEngineWPF\\ConractsTest\\ConractsTest.csproj",
+      "projectUniqueName": "C:\\Users\\Пользователь\\source\\repos\\SecondLABEngineWPF\\ConractsTest\\ConractsTest.csproj",
       "projectName": "ConractsTest",
-      "projectPath": "C:\\Users\\Пользователь\\source\\repos\\SecondLabTheEngineWPF\\ConractsTest\\ConractsTest.csproj",
+      "projectPath": "C:\\Users\\Пользователь\\source\\repos\\SecondLABEngineWPF\\ConractsTest\\ConractsTest.csproj",
       "packagesPath": "C:\\Users\\Пользователь\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Пользователь\\source\\repos\\SecondLabTheEngineWPF\\ConractsTest\\obj\\",
+      "outputPath": "C:\\Users\\Пользователь\\source\\repos\\SecondLABEngineWPF\\ConractsTest\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -5556,8 +5556,8 @@
           "framework": "net8.0-windows7.0",
           "targetAlias": "net8.0-windows",
           "projectReferences": {
-            "C:\\Users\\Пользователь\\source\\repos\\SecondLabTheEngineWPF\\DomainClassLibrary\\DomainClassLibrary.csproj": {
-              "projectPath": "C:\\Users\\Пользователь\\source\\repos\\SecondLabTheEngineWPF\\DomainClassLibrary\\DomainClassLibrary.csproj"
+            "C:\\Users\\Пользователь\\source\\repos\\SecondLABEngineWPF\\DomainClassLibrary\\DomainClassLibrary.csproj": {
+              "projectPath": "C:\\Users\\Пользователь\\source\\repos\\SecondLABEngineWPF\\DomainClassLibrary\\DomainClassLibrary.csproj"
             }
           }
         }

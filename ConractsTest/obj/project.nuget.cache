@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "OtiOuk4xT1g=",
+  "dgSpecHash": "w9+cKDVDfgQ=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Пользователь\\source\\repos\\SecondLabTheEngineWPF\\ConractsTest\\ConractsTest.csproj",
+  "projectFilePath": "C:\\Users\\Пользователь\\source\\repos\\SecondLABEngineWPF\\ConractsTest\\ConractsTest.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Пользователь\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",
     "C:\\Users\\Пользователь\\.nuget\\packages\\microsoft.codecoverage\\17.8.0\\microsoft.codecoverage.17.8.0.nupkg.sha512",
