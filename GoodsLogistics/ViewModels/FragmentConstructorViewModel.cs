@@ -78,7 +78,6 @@ namespace SortingAggregator.ViewModels
         public ICommand CalculateCommand { get; }
         public ICommand ShowTriadCommand { get; }
 
-        // заглушки для базового класса ЛР-1
         public override string ContractPre => "Авто-wp";
         public override string ContractPost => "Цель из XAML";
         public override string ContractEffects => "Анализ Дейкстры";
@@ -98,7 +97,8 @@ namespace SortingAggregator.ViewModels
 
         private void ExecuteLoadPreset(string presetType)
         {
-            if (string.IsNullOrEmpty(presetType)) return;
+            if (string.IsNullOrEmpty(presetType))
+                return;
 
             var preset = WpPresets.GetPreset(presetType);
             CodeText = preset.Code;
@@ -132,7 +132,7 @@ namespace SortingAggregator.ViewModels
                                 
                 Steps.Add(new WpStepItem { Operator = "начало", Condition = PostText }); // обычные строки в красивые объекты для Run Text в XAML
 
-                foreach (var step in result.Steps.Skip(1)) // пропускаем стартовое, так как добавили его красиво
+                foreach (var step in result.Steps.Skip(1)) // пропускаем стартовое, так как добавили его красиво как название
                 {                    
                     string opName = step.Contains("[") ? step.Split('[', ']')[1] : "Команда"; // вырезаем название оператора для красивого разделения в интерфейсе
                     string cond = step.Contains("]:") ? step.Split(new[] { "]:" }, StringSplitOptions.None)[1].Trim() : step;

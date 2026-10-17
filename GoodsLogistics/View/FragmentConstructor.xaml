@@ -105,10 +105,10 @@ Padding="{TemplateBinding Padding}"/>
                 <!-- Постусловие -->
                 <TextBlock Text="Цель (Post)" Style="{StaticResource BaseTextBlockStyle}" FontWeight="Bold" FontSize="16" Margin="0,0,0,4"/>
                 <TextBlock Text="Кратко:" Style="{StaticResource BaseTextBlockStyle}" Margin="0,0,0,4"/>
-                <TextBox Text="{Binding PostText, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BaseTextBoxStyle}" Margin="0,0,0,12" IsReadOnly="True" />
+                <TextBox Text="{Binding PostText, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BaseTextBoxStyle}" Margin="0,0,0,12" />
 
                 <TextBlock Text="Пояснение:" Style="{StaticResource BaseTextBlockStyle}" Margin="0,0,0,4"/>
-                <TextBox Text="{Binding PostHumanText, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BaseTextBoxStyle}" IsReadOnly="True" Margin="0,0,0,12"/>
+                <TextBox Text="{Binding PostHumanText, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BaseTextBoxStyle}" Margin="0,0,0,12"/>
 
                 <!-- Код фрагмента -->
                 <TextBlock Text="Код фрагмента" Style="{StaticResource BaseTextBlockStyle}" FontWeight="Bold" FontSize="16" Margin="0,0,0,4"/>
