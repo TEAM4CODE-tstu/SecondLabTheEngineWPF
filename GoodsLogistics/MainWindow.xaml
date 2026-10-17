@@ -39,7 +39,7 @@
             <ColumnDefinition Width="280"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <TabControl  Grid.Row="0" Grid.ColumnSpan="2">
+        <TabControl  Grid.Row="0" Grid.ColumnSpan="2" SelectionChanged="TabControl_SelectionChanged">
             <TabItem Header="Контракты в интерфейсе">
             <Grid>
                 <Grid.ColumnDefinitions>

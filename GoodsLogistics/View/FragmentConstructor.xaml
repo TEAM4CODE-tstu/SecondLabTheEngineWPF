@@ -1,16 +1,18 @@
 ﻿<UserControl x:Class="GoodsLogistics.Views.FragmentConstructor"
-xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-mc:Ignorable="d"
-d:DesignHeight="450" d:DesignWidth="800">
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.Resources>
+        <!-- Базовые стили текста и полей -->
         <Style x:Key="BaseTextBlockStyle" TargetType="TextBlock">
             <Setter Property="FontFamily" Value="Trebuchet MS"/>
             <Setter Property="FontSize" Value="14"/>
         </Style>
+
         <Style x:Key="BaseTextBoxStyle" TargetType="TextBox">
             <Setter Property="FontFamily" Value="Trebuchet MS"/>
             <Setter Property="FontSize" Value="14"/>
@@ -19,6 +21,8 @@ d:DesignHeight="450" d:DesignWidth="800">
             <Setter Property="BorderBrush" Value="LightGray"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
+
+        <!-- Стиль кнопок действий (основные кнопки) -->
         <Style x:Key="ActionButtonStyle" TargetType="Button">
             <Setter Property="FontFamily" Value="Trebuchet MS"/>
             <Setter Property="FontSize" Value="14"/>
@@ -29,6 +33,8 @@ d:DesignHeight="450" d:DesignWidth="800">
             <Setter Property="Padding" Value="12,4"/>
             <Setter Property="MinWidth" Value="140"/>
         </Style>
+
+        <!-- Стиль прозрачных кнопок-пресетов -->
         <Style x:Key="TransparentPresetButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
@@ -41,19 +47,20 @@ d:DesignHeight="450" d:DesignWidth="800">
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Padding" Value="12,8"/>
             <Setter Property="Cursor" Value="Hand"/>
+
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border Background="{TemplateBinding Background}"
-BorderBrush="{TemplateBinding BorderBrush}"
-BorderThickness="{TemplateBinding BorderThickness}"
-CornerRadius="4">
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="4">
                             <TextBlock Text="{TemplateBinding Content}"
-TextAlignment="Center"
-TextWrapping="Wrap"
-VerticalAlignment="Center"
-Foreground="{TemplateBinding Foreground}"
-Padding="{TemplateBinding Padding}"/>
+                                       TextAlignment="Center"
+                                       TextWrapping="Wrap"
+                                       VerticalAlignment="Center"
+                                       Foreground="{TemplateBinding Foreground}"
+                                       Padding="{TemplateBinding Padding}"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <!-- Наведение -->
@@ -62,7 +69,7 @@ Padding="{TemplateBinding Padding}"/>
                                 <Setter Property="BorderBrush" Value="#007ACC"/>
                                 <Setter Property="BorderThickness" Value="1"/>
                             </Trigger>
-                            <!-- Нажатие (пока держат) -->
+                            <!-- Нажатие -->
                             <Trigger Property="IsPressed" Value="True">
                                 <Setter Property="Background" Value="#B3E5FC"/>
                             </Trigger>
@@ -73,90 +80,160 @@ Padding="{TemplateBinding Padding}"/>
         </Style>
     </UserControl.Resources>
 
+    <!-- Основная сетка: слева панель пресетов, справа контент -->
     <Grid Background="LightBlue">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="220"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <!-- ЛЕВАЯ ЧАСТЬ: Пресеты (как кликабельные ссылки) -->
+        <!-- ЛЕВАЯ ЧАСТЬ: Пресеты -->
         <Border Grid.Column="0" Padding="12, 20, 12, 12" BorderBrush="LightGray" BorderThickness="0,0,1,0">
             <StackPanel>
-                <TextBlock Text="Пресеты" Style="{StaticResource BaseTextBlockStyle}" FontWeight="Bold" FontSize="16" Margin="0,0,0,16"/>
+                <TextBlock Text="Пресеты" 
+                           Style="{StaticResource BaseTextBlockStyle}" 
+                           FontWeight="Bold" 
+                           FontSize="16" 
+                           Margin="0,0,0,16"/>
 
                 <TextBlock x:Name="PresetLabel" 
-                          Text="Ничего не выбрано" 
-                          Style="{StaticResource BaseTextBlockStyle}" 
-                          FontWeight="SemiBold" 
-                          Foreground="#555555"
-                          Margin="0,0,0,16"
-                          VerticalAlignment="Center"/>
+                           Text="Ничего не выбрано" 
+                           Style="{StaticResource BaseTextBlockStyle}" 
+                           FontWeight="SemiBold" 
+                           Foreground="#555555"
+                           Margin="0,0,0,16"
+                           VerticalAlignment="Center"/>
 
-                <!-- Везде указана корректная команда LoadPresetCommand -->
-                <Button Content="Max из двух" Click="OnPresetClicked"  Command="{Binding LoadPresetCommand}" CommandParameter="Max" Style="{StaticResource TransparentPresetButtonStyle}"/>
-                <Button Content="Квадратное уравнение" Click="OnPresetClicked"  Command="{Binding LoadPresetCommand}" CommandParameter="Quad" Style="{StaticResource TransparentPresetButtonStyle}"/>
-                <Button Content="Последовательность" Click="OnPresetClicked"  Command="{Binding LoadPresetCommand}" CommandParameter="Seq" Style="{StaticResource TransparentPresetButtonStyle}"/>
+                <!-- Кнопки пресетов -->
+                <Button Content="Max из двух" 
+                        Click="OnPresetClicked"  
+                        Command="{Binding LoadPresetCommand}" 
+                        CommandParameter="Max" 
+                        Style="{StaticResource TransparentPresetButtonStyle}"/>
+
+                <Button Content="Квадратное уравнение" 
+                        Click="OnPresetClicked"  
+                        Command="{Binding LoadPresetCommand}" 
+                        CommandParameter="Quad" 
+                        Style="{StaticResource TransparentPresetButtonStyle}"/>
+
+                <Button Content="Последовательность" 
+                        Click="OnPresetClicked"  
+                        Command="{Binding LoadPresetCommand}" 
+                        CommandParameter="Seq" 
+                        Style="{StaticResource TransparentPresetButtonStyle}"/>
             </StackPanel>
         </Border>
 
         <!-- ПРАВАЯ ЧАСТЬ: Основные поля и результаты -->
         <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto" Padding="24">
             <StackPanel>
-                <!-- Постусловие -->
-                <TextBlock Text="Цель (Post)" Style="{StaticResource BaseTextBlockStyle}" FontWeight="Bold" FontSize="16" Margin="0,0,0,4"/>
-                <TextBlock Text="Кратко:" Style="{StaticResource BaseTextBlockStyle}" Margin="0,0,0,4"/>
-                <TextBox Text="{Binding PostText, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BaseTextBoxStyle}" Margin="0,0,0,12" />
 
-                <TextBlock Text="Пояснение:" Style="{StaticResource BaseTextBlockStyle}" Margin="0,0,0,4"/>
-                <TextBox Text="{Binding PostHumanText, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BaseTextBoxStyle}" Margin="0,0,0,12"/>
+                <TextBlock Text="Цель (Post)" 
+                           Style="{StaticResource BaseTextBlockStyle}" 
+                           FontWeight="Bold" 
+                           FontSize="16" 
+                           Margin="0,0,0,4"/>
 
-                <!-- Код фрагмента -->
-                <TextBlock Text="Код фрагмента" Style="{StaticResource BaseTextBlockStyle}" FontWeight="Bold" FontSize="16" Margin="0,0,0,4"/>
-                <TextBlock Text="Присваивания, if-else; без циклов" Style="{StaticResource BaseTextBlockStyle}" Foreground="#474b4e" Margin="0,0,0,8"/>
+                <TextBlock Text="Кратко:" 
+                           Style="{StaticResource BaseTextBlockStyle}" 
+                           Margin="0,0,0,4"/>
+                <TextBox Text="{Binding PostText, UpdateSourceTrigger=PropertyChanged}" 
+                         Style="{StaticResource BaseTextBoxStyle}" 
+                         Margin="0,0,0,12" 
+                         IsReadOnly="True" />
+
+                <TextBlock Text="Пояснение:" 
+                           Style="{StaticResource BaseTextBlockStyle}" 
+                           Margin="0,0,0,4"/>
+                <TextBox Text="{Binding PostHumanText, UpdateSourceTrigger=PropertyChanged}" 
+                         Style="{StaticResource BaseTextBoxStyle}" 
+                         IsReadOnly="True" 
+                         Margin="0,0,0,12"/>
+
+
+                <!-- ========================================== -->
+                <!-- БЛОК: Код фрагмента                       -->
+                <!-- ========================================== -->
+                <TextBlock Text="Код фрагмента" 
+                           Style="{StaticResource BaseTextBlockStyle}" 
+                           FontWeight="Bold" 
+                           FontSize="16" 
+                           Margin="0,0,0,4"/>
+                <TextBlock Text="Присваивания, if-else; без циклов" 
+                           Style="{StaticResource BaseTextBlockStyle}" 
+                           Foreground="#474b4e" 
+                           Margin="0,0,0,8"/>
+
                 <TextBox Text="{Binding CodeText, UpdateSourceTrigger=PropertyChanged}"
-IsReadOnly="True"
-FontFamily="Consolas"
-AcceptsReturn="True"
-TextWrapping="Wrap"
-MinHeight="140"
-VerticalScrollBarVisibility="Auto"
-Padding="8"
-Margin="0,0,0,16"
-Background="White"
-BorderBrush="LightGray"
-BorderThickness="1"/>
+                         IsReadOnly="True"
+                         FontFamily="Consolas"
+                         AcceptsReturn="True"
+                         TextWrapping="Wrap"
+                         MinHeight="140"
+                         VerticalScrollBarVisibility="Auto"
+                         Padding="8"
+                         Margin="0,0,0,16"
+                         Background="White"
+                         BorderBrush="LightGray"
+                         BorderThickness="1"/>
 
-                <!-- Кнопки действий -->
+
+                <!-- ========================================== -->
+                <!-- БЛОК: Кнопки действий (Добавлено: Показать шаги) -->
+                <!-- ========================================== -->
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
-                    <Button Content="Рассчитать wp" Command="{Binding CalculateCommand}" Style="{StaticResource ActionButtonStyle}"/>
-                    <Button Content="Показать триаду" Command="{Binding ShowTriadCommand}" Style="{StaticResource ActionButtonStyle}" Margin="12,0,0,0"/>
+                    <Button Content="Рассчитать wp" 
+                            Command="{Binding CalculateCommand}" 
+                            Style="{StaticResource ActionButtonStyle}"/>
+
+                    <Button Content="Показать триаду" 
+                            Command="{Binding ShowTriadCommand}" 
+                            Style="{StaticResource ActionButtonStyle}" 
+                            Margin="12,0,0,0"/>
+
+                    <!-- НОВАЯ КНОПКА: Показать шаги в отдельном окне -->
+                    <Button Content="Показать шаги" 
+                            Command="{Binding ShowStepsCommand}" 
+                            Style="{StaticResource ActionButtonStyle}" 
+                            Margin="12,0,0,0"/>
                 </StackPanel>
 
-                <!-- Ошибки -->
-                <TextBlock Text="{Binding ErrorText}" Foreground="IndianRed" Style="{StaticResource BaseTextBlockStyle}" TextWrapping="Wrap" Margin="0,0,0,16"/>
+                <TextBlock Text="{Binding ErrorText}" 
+                           Foreground="IndianRed" 
+                           Style="{StaticResource BaseTextBlockStyle}" 
+                           TextWrapping="Wrap" 
+                           Margin="0,0,0,16"/>
 
-                <!-- Результаты -->
-                <TextBlock Text="Результаты вычисления" Style="{StaticResource BaseTextBlockStyle}" FontWeight="Bold" FontSize="16" Margin="0,0,0,8"/>
 
-                <TextBlock Text="Шаги:" Style="{StaticResource BaseTextBlockStyle}" Margin="0,0,0,4"/>
-                <ItemsControl ItemsSource="{Binding Steps}" Margin="0,0,0,12">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Style="{StaticResource BaseTextBlockStyle}" Margin="0,2" TextWrapping="Wrap">
-<Run Text="через "/>
-<Run Text="{Binding Operator}" FontWeight="Bold"/>
-<Run Text=" → "/>
-<Run Text="{Binding Condition}"/>
-                            </TextBlock>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+                <TextBlock Text="Результаты вычисления" 
+                           Style="{StaticResource BaseTextBlockStyle}" 
+                           FontWeight="Bold" 
+                           FontSize="16" 
+                           Margin="0,0,0,8"/>
 
-                <TextBlock Text="Итоговое wp:" Style="{StaticResource BaseTextBlockStyle}" FontWeight="Bold" Margin="0,0,0,4" FontSize ="14"/>
-                <TextBlock Text="{Binding FinalWp}" FontFamily="Consolas" FontSize="14" Style="{StaticResource BaseTextBlockStyle}" Margin="0,0,0,4" TextWrapping="Wrap"/>
-                <TextBlock Text="{Binding FinalWpHuman}" TextWrapping="Wrap" Style="{StaticResource BaseTextBlockStyle}" Margin="0,4,0,16"/>
+                <!-- Итоговое wp -->
+                <TextBlock Text="Итоговое wp:" 
+                           Style="{StaticResource BaseTextBlockStyle}" 
+                           FontWeight="Bold" 
+                           Margin="0,0,0,4" 
+                           FontSize ="14"/>
+                <TextBlock Text="{Binding FinalWp}" 
+                           FontFamily="Consolas" 
+                           FontSize="14" 
+                           Style="{StaticResource BaseTextBlockStyle}" 
+                           Margin="0,0,0,4" 
+                           TextWrapping="Wrap"/>
+                <TextBlock Text="{Binding FinalWpHuman}" 
+                           TextWrapping="Wrap" 
+                           Style="{StaticResource BaseTextBlockStyle}" 
+                           Margin="0,4,0,16"/>
 
-                <TextBlock Text="Условия определённости:" Style="{StaticResource BaseTextBlockStyle}" FontWeight="Bold" Margin="0,0,0,8"/>
+                <!-- Условия определённости -->
+                <TextBlock Text="Условия определённости:" 
+                           Style="{StaticResource BaseTextBlockStyle}" 
+                           FontWeight="Bold" 
+                           Margin="0,0,0,8"/>
                 <ItemsControl ItemsSource="{Binding DefinednessNotes}" Margin="0,0,0,12">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -166,9 +243,19 @@ BorderThickness="1"/>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
-                <TextBlock Text="Триада:" Style="{StaticResource BaseTextBlockStyle}" FontWeight="Bold" Margin="0,16,0,4"/>
-                <TextBlock Text="{Binding TriadText}" TextWrapping="Wrap" Style="{StaticResource BaseTextBlockStyle}" FontWeight="SemiBold" Margin="0,0,0,16"/>
+
+                <!-- Триада -->
+                <TextBlock Text="Триада:" 
+                           Style="{StaticResource BaseTextBlockStyle}" 
+                           FontWeight="Bold" 
+                           Margin="0,16,0,4"/>
+                <TextBlock Text="{Binding TriadText}" 
+                           TextWrapping="Wrap" 
+                           Style="{StaticResource BaseTextBlockStyle}" 
+                           FontWeight="SemiBold" 
+                           Margin="0,0,0,16"/>
+
             </StackPanel>
         </ScrollViewer>
     </Grid>
-</UserControl> 
+</UserControl>

@@ -1,6 +1,8 @@
 ﻿
+using SortingAggregator.ViewModels;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace GoodsLogistics
 {
@@ -34,9 +36,26 @@ namespace GoodsLogistics
 
         private void HelpButton_Click(object sender, RoutedEventArgs e)
         {
-            var helpWindow = new GoodsLogistics.HelpWindow();
-            helpWindow.Owner = this;
-            helpWindow.ShowDialog(); 
+            if (this.DataContext is MainViewModel vm)
+            {
+                var helpWindow = new HelpWindow();
+
+                helpWindow.DataContext = vm;
+
+                helpWindow.ShowDialog();
+            }
+        }
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (DataContext is MainViewModel vm)
+            {
+                var tabControl = sender as TabControl;
+                if (tabControl != null && tabControl.SelectedItem is TabItem selectedTab)
+                {
+                    // Передаем заголовок вкладки в ViewModel
+                    vm.UpdateHelpText(selectedTab.Header.ToString());
+                }
+            }
         }
     }
 }
