@@ -145,6 +145,17 @@ namespace SortingAggregator.ViewModels
                 {
                     DefinednessNotes.Add("Обнаружена операция деления. Добавлена проверка определенности (знаменатель != 0)");
                 }
+
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    var window = new GoodsLogistics.Views.StepsWindow
+                    {
+                        DataContext = this, // Окно коллеги увидит все наши свойства (Steps, FinalWp)
+                        Owner = Application.Current.MainWindow,
+                        WindowStartupLocation = WindowStartupLocation.CenterOwner
+                    };
+                    window.ShowDialog(); // Открываем окно модально
+                });
             }
             catch (Exception ex)
             {

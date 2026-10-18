@@ -48,7 +48,7 @@
                      MinHeight="200">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Style="{StaticResource BaseTextBoxStyle}">
+                        <TextBlock Style="{StaticResource BaseTextBlockStyle}">
                             <Run Text="через "/>
                             <Run Text="{Binding Operator}" FontWeight="Bold" Foreground="#007ACC"/>
                             <Run Text=" → "/>
