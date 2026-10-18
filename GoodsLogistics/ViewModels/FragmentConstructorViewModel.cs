@@ -93,6 +93,28 @@ namespace SortingAggregator.ViewModels
             LoadPresetCommand = new RelayCommand(param => ExecuteLoadPreset(param?.ToString())); // связка кнопок с логикой
             CalculateCommand = new RelayCommand(_ => ExecuteCalculateWp());
             ShowTriadCommand = new RelayCommand(_ => ExecuteShowHoareTriple());
+            ShowStepsCommand = new RelayCommand(_ => ExecuteShowSteps());
+        }
+        public ICommand ShowStepsCommand { get; }
+
+        private void ExecuteShowSteps()
+        {
+            if (Steps.Count == 0 && string.IsNullOrEmpty(FinalWp))
+            {
+                MessageBox.Show("Сначала выполните расчёт (кнопка «Рассчитать wp»)", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                var window = new GoodsLogistics.Views.StepsWindow
+                {
+                    DataContext = this,
+                    Owner = Application.Current.MainWindow,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner
+                };
+                window.ShowDialog();
+            });
         }
 
         private void ExecuteLoadPreset(string presetType)
@@ -145,17 +167,6 @@ namespace SortingAggregator.ViewModels
                 {
                     DefinednessNotes.Add("Обнаружена операция деления. Добавлена проверка определенности (знаменатель != 0)");
                 }
-
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    var window = new GoodsLogistics.Views.StepsWindow
-                    {
-                        DataContext = this, // Окно коллеги увидит все наши свойства (Steps, FinalWp)
-                        Owner = Application.Current.MainWindow,
-                        WindowStartupLocation = WindowStartupLocation.CenterOwner
-                    };
-                    window.ShowDialog(); // Открываем окно модально
-                });
             }
             catch (Exception ex)
             {

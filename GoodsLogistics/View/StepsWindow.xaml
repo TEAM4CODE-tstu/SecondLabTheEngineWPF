@@ -37,8 +37,7 @@
                        Style="{StaticResource BaseTextBlockStyle}" 
                        FontWeight="Bold" 
                        FontSize="16" 
-                       Margin="0,0,0,15"
-                       Foreground="#333"/>
+                       Margin="0,0,0,15"/>
 
             <!-- Список шагов -->
             <ListBox ItemsSource="{Binding Steps}" 
