@@ -212,16 +212,12 @@
                            FontWeight="Bold" 
                            Margin="0,0,0,4" 
                            FontSize ="14"/>
-                <TextBlock Text="{Binding FinalWp}" 
+                <TextBox Text="{Binding FinalWp}" 
                            FontFamily="Consolas" 
                            FontSize="14" 
-                           Style="{StaticResource BaseTextBlockStyle}" 
+                           Style="{StaticResource BaseTextBoxStyle}" 
                            Margin="0,0,0,4" 
                            TextWrapping="Wrap"/>
-                <TextBlock Text="{Binding FinalWpHuman}" 
-                           TextWrapping="Wrap" 
-                           Style="{StaticResource BaseTextBlockStyle}" 
-                           Margin="0,4,0,16"/>
 
                 <!-- Условия определённости -->
                 <TextBlock Text="Условия определённости:" 
@@ -243,9 +239,9 @@
                            Style="{StaticResource BaseTextBlockStyle}" 
                            FontWeight="Bold" 
                            Margin="0,16,0,4"/>
-                <TextBlock Text="{Binding TriadText}" 
+                <TextBox Text="{Binding TriadText}" 
                            TextWrapping="Wrap" 
-                           Style="{StaticResource BaseTextBlockStyle}" 
+                           Style="{StaticResource BaseTextBoxStyle}" 
                            FontWeight="SemiBold" 
                            Margin="0,0,0,16"/>
 
