@@ -7,7 +7,6 @@ namespace GoodsLogistics.Views
         public StepsWindow()
         {
             InitializeComponent();
-            // DataContext установим из ViewModel
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)

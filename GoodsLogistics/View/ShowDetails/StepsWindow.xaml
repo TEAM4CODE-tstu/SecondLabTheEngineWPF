@@ -2,7 +2,11 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Шаги выполнения"
-        Height="370" Width="500" Background="LightBlue"
+         SizeToContent="WidthAndHeight" 
+        MaxWidth="800" MaxHeight="700"
+        
+        ResizeMode="CanResize"
+       Height="400" Width="600" Background="LightBlue"
         WindowStartupLocation="CenterOwner">
 
     <Window.Resources>

@@ -77,6 +77,7 @@ namespace SortingAggregator.ViewModels
         public ICommand LoadPresetCommand { get; }
         public ICommand CalculateCommand { get; }
         public ICommand ShowTriadCommand { get; }
+        public ICommand ShowStepsCommand { get; }
 
         public override string ContractPre => "Авто-wp";
         public override string ContractPost => "Цель из XAML";
@@ -95,7 +96,6 @@ namespace SortingAggregator.ViewModels
             ShowTriadCommand = new RelayCommand(_ => ExecuteShowHoareTriple());
             ShowStepsCommand = new RelayCommand(_ => ExecuteShowSteps());
         }
-        public ICommand ShowStepsCommand { get; }
 
         private void ExecuteShowSteps()
         {
@@ -172,6 +172,14 @@ namespace SortingAggregator.ViewModels
             {
                 ErrorText = $"Ошибка анализа: {ex.Message}";
             }
+            var window = new GoodsLogistics.View.CalculateWP
+            {
+                DataContext = this,
+                Owner = Application.Current.MainWindow,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner
+            };
+            window.ShowDialog();
+
         }
         private void ExecuteShowHoareTriple()
         {
@@ -183,6 +191,13 @@ namespace SortingAggregator.ViewModels
            TriadText = $"{{{FinalWp}}}\n\n" +
             $"{CodeText}\n\n" +
             $"{{{PostText}\n   // {PostHumanText}}}";
+            var window = new GoodsLogistics.View.HoareTriad
+            {
+                DataContext = this,
+                Owner = Application.Current.MainWindow,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner
+            };
+            window.ShowDialog();
         }
 
         protected override bool CheckPre(out string failReason) { failReason = ""; return true; }
