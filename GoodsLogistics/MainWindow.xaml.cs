@@ -30,7 +30,7 @@ namespace GoodsLogistics
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
-            _canClose = true; 
+            _canClose = true;
             Application.Current.Shutdown();
         }
 
