@@ -5,16 +5,14 @@
         xmlns:View="clr-namespace:GoodsLogistics.Views"  
         Title="Администратор процесса погрузки"
         Closing="Window_Closing" 
-        Height="700" Width="1080"
-        ResizeMode="CanResize"
+        Height="500" Width="1080"
+        ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"  Background="LightBlue">
-
     <Window.DataContext>
         <vm:MainViewModel/>
     </Window.DataContext>
-
     <Window.Resources>
-        <!-- Конвертер bool в цветовые индикаторы соответствия постусловия (зелёный/красный) -->
+        <!-- Конвертер bool в цветовые индикаторы соответсвия постусловия (зелёный/красный) -->
         <Style x:Key="IndicatorStyle" TargetType="Ellipse">
             <Setter Property="Width" Value="16"/>
             <Setter Property="Height" Value="16"/>
@@ -28,33 +26,7 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-
-        <!-- Базовые стили для формы ЛР-3 -->
-        <Style x:Key="BaseTextBlockStyle" TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="Trebuchet MS"/>
-            <Setter Property="FontSize" Value="14"/>
-        </Style>
-        <Style x:Key="BaseTextBoxStyle" TargetType="TextBox">
-            <Setter Property="FontFamily" Value="Trebuchet MS"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Padding" Value="8"/>
-            <Setter Property="Background" Value="White"/>
-            <Setter Property="BorderBrush" Value="LightGray"/>
-            <Setter Property="BorderThickness" Value="1"/>
-        </Style>
-        <Style x:Key="ActionButtonStyle" TargetType="Button">
-            <Setter Property="FontFamily" Value="Trebuchet MS"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="Height" Value="36"/>
-            <Setter Property="Background" Value="LightGray"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Padding" Value="12,4"/>
-            <Setter Property="MinWidth" Value="100"/>
-        </Style>
     </Window.Resources>
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -64,34 +36,34 @@
             <ColumnDefinition Width="280"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-
-        <TabControl Grid.Row="0" Grid.ColumnSpan="2" SelectionChanged="TabControl_SelectionChanged">
-
-            <!-- Вкладка 1: Контракты в интерфейсе (ЛР-1) -->
+        <TabControl Grid.Row="0" Grid.ColumnSpan="2">
             <TabItem Header="Контракты в интерфейсе">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="280"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-
                     <Grid Grid.Column="0" Background="LightBlue">
-                        <ListBox ItemsSource="{Binding Operations}"
-                            DisplayMemberPath="DisplayName"
-                            SelectedItem="{Binding SelectedOperation}"
-                            Background="Transparent"
-                            FontSize="16"
-                            FontFamily="Trebuchet MS"
-                            FontWeight="SemiBold" 
-                            HorizontalContentAlignment="Center"
-                            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                            BorderThickness="0"
-                            Margin="8,8,8,4"/>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <ListBox Grid.Row="0" 
+  ItemsSource="{Binding Operations}"
+  DisplayMemberPath="DisplayName"
+  SelectedItem="{Binding SelectedOperation}"
+                        Background="Transparent"
+  FontSize="16"
+  FontFamily="Trebuchet MS"
+  FontWeight="SemiBold" 
+  HorizontalContentAlignment="Center"
+  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+  BorderThickness="0"
+                        Margin="8,8,8,4"/>
                     </Grid>
-
+                    <!-- Правая панель -->
                     <Grid Grid.Column="1" Background="LightBlue">
                         <Border Margin="0" Padding="16" Background="Transparent"
-                                BorderBrush="LightGray" BorderThickness="0" CornerRadius="0">
+  BorderBrush="LightGray" BorderThickness="0" CornerRadius="0">
                             <ScrollViewer VerticalScrollBarVisibility="Auto">
                                 <StackPanel DataContext="{Binding SelectedOperation}">
                                     <StackPanel.Style>
@@ -104,22 +76,23 @@
                                             </Style.Triggers>
                                         </Style>
                                     </StackPanel.Style>
-
+                                    <!-- Заголовок -->
                                     <TextBlock Text="{Binding DisplayName}"
-                                               FontSize="20" FontFamily="Trebuchet MS" FontWeight="Bold" Margin="0,0,0,16"/>
-
+  FontSize="20" FontFamily="Trebuchet MS" FontWeight="Bold" Margin="0,0,0,16"/>
+                                    <!-- Ввод -->
                                     <TextBlock Text="Введите веса прибывших грузов (через пробел, запятую или ;):" Margin="0,0,0,4"/>
                                     <TextBlock Text="Возможно ввести не более 100 грузов весом не более 20 кг каждый" Margin="0,0,0,4"/>
                                     <TextBox Text="{Binding InputText, UpdateSourceTrigger=PropertyChanged}"
-                                             Margin="0,0,0,12" Padding="4"/>
-
+                             Margin="0,0,0,12" Padding="4"/>
+                                    <!-- Горизонтальная линия управления конвейером -->
                                     <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                                        <!-- Кнопка Выполнить -->
                                         <Button Content="Выполнить"
-                                                Command="{Binding ExecuteCommand}"
-                                                Width="140" Height="36" 
-                                                FontSize="14" FontWeight="Bold"
-                                                Background="LightGray"/>
-
+                                        Command="{Binding ExecuteCommand}"
+                                        Width="140" Height="36" 
+  FontSize="14" FontWeight="Bold"
+                                        Background="LightGray"/>
+                                        <!-- КОМБОБОКС (Виден только при Оптимизации погрузки) -->
                                         <StackPanel Orientation="Horizontal" Margin="16,0,0,0">
                                             <StackPanel.Style>
                                                 <Style TargetType="StackPanel">
@@ -131,17 +104,16 @@
                                                     </Style.Triggers>
                                                 </Style>
                                             </StackPanel.Style>
-
                                             <TextBlock Text="Тип сортировки:" FontFamily="Trebuchet MS" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,8,0"/>
                                             <ComboBox Width="180" Height="36" VerticalContentAlignment="Center" Background="LightGray" SelectedIndex="0" FontSize="13" FontWeight="Bold"
-                                                      SelectedValuePath="Content"
-                                                      SelectedValue="{Binding SelectedSortType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+  SelectedValuePath="Content"
+  SelectedValue="{Binding SelectedSortType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                                 <ComboBoxItem Content="Подсчётом"/>
                                                 <ComboBoxItem Content="Быстрая"/>
                                                 <ComboBoxItem Content="Слиянием"/>
                                             </ComboBox>
                                         </StackPanel>
-
+                                        <!-- ТЕКСТБОКС ВРЕМЕНИ (Виден только при Оптимизации погрузки) -->
                                         <StackPanel Orientation="Horizontal" Margin="24,0,0,0">
                                             <StackPanel.Style>
                                                 <Style TargetType="StackPanel">
@@ -153,24 +125,24 @@
                                                     </Style.Triggers>
                                                 </Style>
                                             </StackPanel.Style>
-
-                                            <TextBlock Text="Время выполнения:" FontFamily="Trebuchet MS" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                            <TextBlock Text="Время выполнения:" FontFamily="Trebuchet MS" FontSize="14" FontWeight="Bold"    VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                            <!-- Поле вывода времени связано со свойством ExecutionTime -->
                                             <TextBox Text="{Binding ExecutionTime, StringFormat={}{0:F3} мс}"
-                                                     Width="100" Height="36"
-                                                     HorizontalContentAlignment="Center"
-                                                     VerticalContentAlignment="Center"
-                                                     FontSize="14" FontWeight="Bold"
-                                                     IsReadOnly="True"
-                                                     Background="LightGray"
-                                                     BorderBrush="LightGray"/>
+                                         Width="100" Height="36"
+  HorizontalContentAlignment="Center"
+  VerticalContentAlignment="Center"
+  FontSize="14" FontWeight="Bold"
+  IsReadOnly="True"
+                                         Background="LightGray"
+  BorderBrush="LightGray"/>
                                         </StackPanel>
                                     </StackPanel>
-
+                                    <!-- Индикаторы Pre или Post -->
                                     <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
-                                        <Ellipse Style="{StaticResource IndicatorStyle}" Margin="0,0,8,0"/>
+                                        <Ellipse Style="{StaticResource IndicatorStyle}"
+                                 Margin="0,0,8,0"/>
                                         <TextBlock Text="{Binding PreStatus}" TextWrapping="Wrap" VerticalAlignment="Center"/>
                                     </StackPanel>
-
                                     <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
                                         <Ellipse Width="16" Height="16" Margin="0,0,8,0">
                                             <Ellipse.Style>
@@ -189,138 +161,61 @@
                                         </Ellipse>
                                         <TextBlock Text="{Binding PostStatus}" VerticalAlignment="Center"/>
                                     </StackPanel>
-
+                                    <!-- Результат -->
                                     <TextBlock Text="Результат:" FontWeight="Bold" FontSize="16" FontFamily="Trebuchet MS" Margin="0,0,0,4"/>
                                     <TextBlock Text="{Binding ResultText, TargetNullValue='—'}"
-                                               FontFamily="Trebuchet MS" FontSize="14" 
-                                               TextWrapping="Wrap" Margin="0,0,0,16"/>
-
+  FontFamily="Trebuchet MS" FontSize="14" 
+  TextWrapping="Wrap" Margin="0,0,0,16"/>
+                                    <!-- Кнопка контракта -->
                                     <Button Content="Показать контракт"
-                                            Background="LightGray"
-                                            Height="36" FontSize="14"
-                                            Command="{Binding ShowContractCommand}"
-                                            FontFamily="Trebuchet MS"
-                                            Width="160" HorizontalAlignment="Left"
-                                            Padding="8,4"/>
+  Background="LightGray"
+                                    Height="36" FontSize="14"
+                            Command="{Binding ShowContractCommand}"
+  FontFamily="Trebuchet MS"
+                            Width="160" HorizontalAlignment="Left"
+                            Padding="8,4"/>
                                 </StackPanel>
                             </ScrollViewer>
                         </Border>
                     </Grid>
                 </Grid>
             </TabItem>
-
-            <!-- Вкладка 2: Конструктор фрагмента (ЛР-2) -->
             <TabItem Header="Конструктор фрагмента" DataContext="{Binding FragmentConstructor}">
                 <View:FragmentConstructor/>
             </TabItem>
 
-            <!-- Вкладка 3: Циклы под микроскопом (ЛР-3) -->
+            <!-- Вкладка 3 -->
             <TabItem Header="Циклы: Инварианты">
                 <TabItem.DataContext>
                     <vm:CycleViewModel/>
                 </TabItem.DataContext>
-
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                    <Grid Background="LightBlue" Margin="10" MinHeight="600">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="250"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <!-- Левая панель: Настройки -->
-                        <StackPanel Grid.Column="0" Margin="0,0,10,0">
-                            <TextBlock Text="Режим цикла:" Style="{StaticResource BaseTextBlockStyle}" FontWeight="Bold" Margin="0,0,0,5"/>
-                            <ComboBox ItemsSource="{Binding Modes}" 
-                                      SelectedItem="{Binding SelectedMode}" 
-                                      DisplayMemberPath="Name"
-                                      Margin="0,0,0,15"
-                                      FontFamily="Trebuchet MS"
-                                      FontSize="14"
-                                      Height="32"/>
-
-                            <TextBlock Text="Массив (через запятую):" Style="{StaticResource BaseTextBlockStyle}" FontWeight="Bold" Margin="0,0,0,5"/>
-                            <TextBox Text="{Binding ArrayInputText, UpdateSourceTrigger=PropertyChanged}" 
-                                     Height="60" TextWrapping="Wrap" Margin="0,0,0,15"
-                                     Style="{StaticResource BaseTextBoxStyle}"/>
-
-                            <TextBlock Text="Порог T (для Count>T):" Style="{StaticResource BaseTextBlockStyle}" FontWeight="Bold" Margin="0,0,0,5"/>
-                            <TextBox Text="{Binding Threshold}" Margin="0,0,0,15" Style="{StaticResource BaseTextBoxStyle}"/>
-
-                            <Button Content="Сброс" Command="{Binding ResetCommand}" Margin="0,0,0,10" Style="{StaticResource ActionButtonStyle}"/>
-                            <Button Content="Шаг" Command="{Binding StepCommand}" Margin="0,0,0,10" Style="{StaticResource ActionButtonStyle}"/>
-                            <Button Content="Пуск (Авто)" Command="{Binding RunCommand}" Style="{StaticResource ActionButtonStyle}"/>
-                        </StackPanel>
-
-                        <!-- Правая панель: Визуализация -->
-                        <StackPanel Grid.Column="1">
-                            <TextBlock Text="Массив данных:" Style="{StaticResource BaseTextBlockStyle}" FontWeight="Bold" Margin="0,0,0,5"/>
-                            <ListBox ItemsSource="{Binding ArrayItems}" Height="100" Margin="0,0,0,15">
-                                <ListBox.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <WrapPanel />
-                                    </ItemsPanelTemplate>
-                                </ListBox.ItemsPanel>
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <Border BorderBrush="Gray" BorderThickness="1" Margin="2" Padding="5" Background="White">
-                                            <TextBlock Text="{Binding}" Style="{StaticResource BaseTextBlockStyle}"/>
-                                        </Border>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-
-                            <!-- Блок Инварианта -->
-                            <Border BorderBrush="Black" BorderThickness="1" Padding="10" Margin="0,0,0,10" Background="White">
-                                <StackPanel>
-                                    <TextBlock Text="Блок: Инвариант и Вариант" FontWeight="Bold" FontSize="16" Margin="0,0,0,5" Style="{StaticResource BaseTextBlockStyle}"/>
-
-                                    <TextBlock Text="{Binding SelectedMode.InvariantText}" FontStyle="Italic" Margin="0,0,0,5" Style="{StaticResource BaseTextBlockStyle}"/>
-                                    <TextBlock Text="{Binding SelectedMode.InvariantFormula}" FontFamily="Consolas" Foreground="Blue" Margin="0,0,0,10" Style="{StaticResource BaseTextBlockStyle}"/>
-
-                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                                        <TextBlock Text="Статус инварианта: " FontWeight="Bold" Style="{StaticResource BaseTextBlockStyle}"/>
-                                        <TextBlock Text="{Binding InvariantStatusText}" Foreground="Green" Style="{StaticResource BaseTextBlockStyle}"/>
-                                    </StackPanel>
-
-                                    <TextBlock Text="Вариант-функция t(j):" Margin="0,0,0,2" Style="{StaticResource BaseTextBlockStyle}"/>
-                                    <ProgressBar Value="{Binding VariantProgress}" Maximum="100" Height="20" Margin="0,0,0,5"/>
-                                    <TextBlock Text="{Binding VariantStatusText}" HorizontalAlignment="Right" FontSize="12" Style="{StaticResource BaseTextBlockStyle}"/>
-                                </StackPanel>
-                            </Border>
-
-                            <!-- Блок WP -->
-                            <Border BorderBrush="Black" BorderThickness="1" Padding="10" Background="White">
-                                <StackPanel>
-                                    <TextBlock Text="Блок: Проверка сохранения (wp)" FontWeight="Bold" FontSize="16" Margin="0,0,0,5" Style="{StaticResource BaseTextBlockStyle}"/>
-                                    <TextBlock Text="{Binding WpExplanation}" TextWrapping="Wrap" FontFamily="Consolas" FontSize="12" Style="{StaticResource BaseTextBlockStyle}"/>
-                                </StackPanel>
-                            </Border>
-                        </StackPanel>
-                    </Grid>
+                    <View:CycleView/>
                 </ScrollViewer>
             </TabItem>
+
         </TabControl>
-
-        <!-- Нижняя панель с кнопками -->
-        <Grid Grid.Row="1" Grid.ColumnSpan="2" Background="LightBlue">
-            <StackPanel Orientation="Horizontal" Margin="8,4,8,8">
-                <Button Content="Справка пользователя"
-                        Height="32" Width="200"
-                        Background="LightGray"
-                        FontSize="16"
-                        FontFamily="Trebuchet MS"
-                        FontWeight="SemiBold"
-                        Click="HelpButton_Click"/>
-
-                <Button Content="Выход"
-                        Height="32" Width="200"
-                        Margin="10,0,0,0"
-                        Background="#ff7575"
-                        FontSize="16"
-                        FontFamily="Trebuchet MS"
-                        FontWeight="SemiBold"
-                        Click="ExitButton_Click"/>
-            </StackPanel>
-        </Grid>
+        <StackPanel Grid.Row="2">
+            <Button Grid.Row="1" HorizontalAlignment="Left"
+           Content="Справка пользователя"
+  Height="32" Width="200"
+  Margin="8,4,8,4"
+           Background="LightGray"
+  FontSize="16"
+  FontFamily="Trebuchet MS"
+  FontWeight="SemiBold"
+           Click="HelpButton_Click"/>
+            <!-- Размещение кнопки выхода в самом низу колонки -->
+            <Button Grid.Row="2"
+           Content="Выход"
+  HorizontalAlignment="Left"
+           Height="32" Width="200"
+           Margin="8,4,8,8"
+           Background="#ff7575"
+  FontSize="16"
+  FontFamily="Trebuchet MS"
+  FontWeight="SemiBold"
+           Click="ExitButton_Click"/>
+        </StackPanel>
     </Grid>
 </Window>

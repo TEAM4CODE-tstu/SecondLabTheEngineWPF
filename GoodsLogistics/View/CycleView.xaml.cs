@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace GoodsLogistics.View
+namespace GoodsLogistics.Views
 {
     public partial class CycleView : UserControl
     {

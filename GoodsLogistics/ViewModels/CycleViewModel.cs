@@ -63,7 +63,11 @@ namespace SortingAggregator.ViewModels
         public int Threshold
         {
             get => _threshold;
-            set => SetProperty(ref _threshold, value);
+            set
+            {
+                if (SetProperty(ref _threshold, value))
+                    ResetSimulation();
+            }
         }
 
         public ObservableCollection<CycleModeInfo> Modes

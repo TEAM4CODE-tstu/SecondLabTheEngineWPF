@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="GoodsLogistics.View.CycleView"
+﻿<UserControl x:Class="GoodsLogistics.Views.CycleView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -69,7 +69,8 @@
                          Height="50" TextWrapping="Wrap" Margin="0,0,0,10" Style="{StaticResource BaseTextBoxStyle}"/>
 
                 <TextBlock Text="Порог T (для Count&gt;T):" Style="{StaticResource BaseTextBlockStyle}" FontWeight="Bold" Margin="0,0,0,5"/>
-                <TextBox Text="{Binding Threshold}" Margin="0,0,0,10" Style="{StaticResource BaseTextBoxStyle}"/>
+                <TextBox Text="{Binding Threshold, UpdateSourceTrigger=PropertyChanged}"
+                         Margin="0,0,0,10" Style="{StaticResource BaseTextBoxStyle}"/>
 
                 <Button Content="Сброс" Command="{Binding ResetCommand}" Margin="0,0,0,5" Style="{StaticResource ActionButtonStyle}" HorizontalAlignment="Stretch"/>
                 <Button Content="Шаг" Command="{Binding StepCommand}" Margin="0,0,0,5" Style="{StaticResource ActionButtonStyle}" HorizontalAlignment="Stretch"/>

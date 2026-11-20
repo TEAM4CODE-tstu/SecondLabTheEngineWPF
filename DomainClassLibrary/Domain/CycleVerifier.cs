@@ -130,6 +130,7 @@ namespace DomainClassLibrary
             $"Режим: {_mode.Name}\n" +
             $"Тело цикла S: {_mode.BodyCode}\n" +
             $"Инвариант R: {_mode.InvariantFormula}\n" +
+            $"Порог T: {_threshold}\n" +
             $"wp(S, R) = {_wpCondition}\n" +
             $"Условие сохранения: Inv ∧ B ⇒ wp(S, Inv')\n" +
             $"Определенность: {_mode.DefCondition}";
